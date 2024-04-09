@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '云开发 QuickStart'
+  navigationBarTitleText: '胜道圈速榜'
 }

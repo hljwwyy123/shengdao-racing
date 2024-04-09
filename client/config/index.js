@@ -9,8 +9,11 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: [],
+  plugins: ['@tarojs/plugin-html'],
   defineConstants: {
+  },
+  sass:{
+    data: `@import "@nutui/nutui-react-taro/dist/styles/variables.scss";`
   },
   copy: {
     patterns: [
@@ -19,7 +22,11 @@ const config = {
     }
   },
   framework: 'react',
-  compiler: 'webpack5',
+  compiler: {
+    type: 'webpack5',
+    prebundle: { enable: false },
+  },
+  // compiler: 'webpack5',
   cache: {
     enable: false // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
   },
@@ -28,7 +35,7 @@ const config = {
       pxtransform: {
         enable: true,
         config: {
-
+          selectorBlackList: ['nut-']
         }
       },
       url: {

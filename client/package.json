@@ -57,6 +57,7 @@
     "@babel/core": "^7.8.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
     "@tarojs/cli": "3.6.25",
+    "@tarojs/plugin-html": "^3.6.25",
     "@tarojs/taro-loader": "3.6.25",
     "@tarojs/webpack5-runner": "3.6.25",
     "@types/node": "^18.15.11",
@@ -64,6 +65,7 @@
     "@types/webpack-env": "^1.13.6",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
+    "babel-plugin-import": "^1.13.8",
     "babel-preset-taro": "3.6.25",
     "eslint": "^8.12.0",
     "eslint-config-taro": "3.6.25",
@@ -76,5 +78,6 @@
     "ts-node": "^10.9.1",
     "typescript": "^4.1.0",
     "webpack": "^5.78.0"
-  }
+  },
+  "repository": "https://github.com/hljwwyy123/shengdao-racing.git"
 }
