@@ -23,14 +23,14 @@ export default class Index extends Component<PropsWithChildren> {
           {
             "car_name":"26号",
             "dateTime":1712136373670,
-            "lap_create_time": "2024-04-10 20:26:08",
-            "single_score": 111111,
+            "lap_create_time": "2024-04-10 12:00:08",
+            "single_score": 33333,
           },
           {
-            "car_name":"26号",
+            "car_name":"28号",
             "dateTime":1712136373670,
-            "lap_create_time": "2024-04-10 20:26:08",
-            "single_score": 22222,
+            "lap_create_time": "2024-04-10 13:26:08",
+            "single_score": 4444,
           },
         ]
       }
@@ -42,7 +42,7 @@ export default class Index extends Component<PropsWithChildren> {
     return (
       <View className='index'>
         <Login/>
-        <Button onClick={this.postdata} type='primary'>测试</Button>
+        <Button onClick={this.postdata} type='primary'>模拟本地node提交数据</Button>
       </View>
     )
   }

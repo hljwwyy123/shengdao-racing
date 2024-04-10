@@ -3,5 +3,18 @@
   "projectname": "racing-score",
   "setting": {
     "compileHotReLoad": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "扫码计时器",
+          "pathName": "pages/scanQRCode/index",
+          "query": "timer=28号",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
   }
 }
