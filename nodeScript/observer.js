@@ -12,7 +12,7 @@ const db = new sqlite3.Database('/Users/joy/Documents/kart-4-3.7.db', (err) => {
 
 // 函数：发送HTTP请求，并返回Promise
 function sendHttpRequest(data) {
-  return axios.post('https://racing-7gxq1capbac7539a-1300165852.ap-shanghai.app.tcloudbase.com/postdata', data, {
+  return axios.post('https://racing-7gxq1capbac7539a-1300165852.ap-shanghai.app.tcloudbase.com/postfromlocal', data, {
     Headers: {
       'Content-type': 'application/json'
     }
