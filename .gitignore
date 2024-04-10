@@ -1,0 +1,9 @@
+dist/
+deploy_versions/
+.temp/
+.rn_temp/
+nodeScript/node_modules
+cloud/functions/bind_wx/node_modules
+cloud/functions/post_fromlocal/node_modules
+.DS_Store
+.swc
