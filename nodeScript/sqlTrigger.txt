@@ -1,0 +1,20 @@
+// score_detail表创建触发器
+
+INSERT INTO score_log (car_name, single_score, uploaded, lap_create_time)
+    SELECT B.car_name, NEW.single_score, 0, datetime('now')
+    FROM score_list B
+    WHERE B.score_id = NEW.score_id;
+
+
+// 创建日志表
+CREATE TABLE score_log (
+    id              INTEGER PRIMARY KEY,
+    uploaded        INTEGER DEFAULT (0),
+    car_name        STRING,
+    lap_create_time DATE    DEFAULT (datetime('now') ),
+    single_score    STRING
+);
+
+
+// 插入数据测试触发器
+INSERT INTO score_detail (score_id, single_score) VALUES (2024040312431160324, 10000);
