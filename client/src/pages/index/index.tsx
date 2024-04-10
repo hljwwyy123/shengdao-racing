@@ -15,11 +15,34 @@ export default class Index extends Component<PropsWithChildren> {
 
   componentDidHide () { }
 
+  postdata = async () => {
+    Taro.cloud.callFunction({
+      name: 'post_score_fromlocal',
+      data: {
+        body: [
+          {
+            "car_name":"26号",
+            "dateTime":1712136373670,
+            "lap_create_time": "2024-04-10 20:26:08",
+            "single_score": 111111,
+          },
+          {
+            "car_name":"26号",
+            "dateTime":1712136373670,
+            "lap_create_time": "2024-04-10 20:26:08",
+            "single_score": 22222,
+          },
+        ]
+      }
+
+    })
+  }
+
   render () {
     return (
       <View className='index'>
         <Login/>
-        <Button type='primary'>测试</Button>
+        <Button onClick={this.postdata} type='primary'>测试</Button>
       </View>
     )
   }

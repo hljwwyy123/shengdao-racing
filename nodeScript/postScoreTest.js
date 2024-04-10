@@ -1,6 +1,6 @@
 const axios = require('axios')
-// const CLOUD_FUNCTION_HTTPPATH = 'postfromlocal'
-const CLOUD_FUNCTION_HTTPPATH = 'postdata'
+const CLOUD_FUNCTION_HTTPPATH = 'postfromlocal'
+// const CLOUD_FUNCTION_HTTPPATH = 'postdata'
 // 函数：发送HTTP请求，并返回Promise
 function sendHttpRequest(data) {
     return axios.post(`https://racing-7gxq1capbac7539a-1300165852.ap-shanghai.app.tcloudbase.com/${CLOUD_FUNCTION_HTTPPATH}`, data, {
@@ -30,13 +30,13 @@ function sendHttpRequest(data) {
     {
       "car_name":"26号",
       "dateTime":1712136373670,
-      "lap_create_time": "2024-04-09 20:26:08",
+      "lap_create_time": "2024-04-10 20:26:08",
       "single_score": 13333,
     },
     {
       "car_name":"26号",
       "dateTime":1712136373670,
-      "lap_create_time": "2024-04-09 20:26:08",
+      "lap_create_time": "2024-04-10 20:26:08",
       "single_score": 15555,
     },
   ])
