@@ -17,30 +17,6 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
   console.log('Connected to the SQLite database')
 });
 
-// 函数：发送HTTP请求，并返回Promise
-function sendHttpRequest(data) {
-  return axios.post(`https://racing-7gxq1capbac7539a-1300165852.ap-shanghai.app.tcloudbase.com/${CLOUD_FUNCTION_HTTPPATH}`, data, {
-    Headers: {
-      'Content-type': 'application/json'
-    }
-  })
-    .then(response => {
-      // 请求成功，返回响应
-      return {
-        success: true,
-        id: data.id,
-        response: response.data
-      };
-    })
-    .catch(error => {
-      // 请求失败，返回错误
-      return {
-        success: false,
-        id: data.id,
-        error: error
-      };
-    });
-}
 
 // 函数：处理score_log中所有记录的上传和删除
 function processScoreLogs() {
@@ -64,6 +40,31 @@ function processScoreLogs() {
       });
     }
   });
+}
+
+// 函数：发送HTTP请求，并返回Promise
+function sendHttpRequest(data) {
+  return axios.post(`https://racing-7gxq1capbac7539a-1300165852.ap-shanghai.app.tcloudbase.com/${CLOUD_FUNCTION_HTTPPATH}`, data, {
+    Headers: {
+      'Content-type': 'application/json'
+    }
+  })
+    .then(response => {
+      // 请求成功，返回响应
+      return {
+        success: true,
+        id: data.id,
+        response: response.data
+      };
+    })
+    .catch(error => {
+      // 请求失败，返回错误
+      return {
+        success: false,
+        id: data.id,
+        error: error
+      };
+    });
 }
 
 

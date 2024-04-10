@@ -6,6 +6,9 @@ nodeScript/node_modules
 cloud/functions/bind_wx/node_modules
 cloud/functions/post_fromlocal/node_modules
 cloud/functions/post_score_fromlocal/node_modules/
+cloud/functions/query_realtime_score/node_modules/
+cloud/functions/query_total_rank/node_modules/
+cloud/functions/*/node_modules/
 *package-lock.json
 .DS_Store
 .swc
