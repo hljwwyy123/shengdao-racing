@@ -1,6 +1,78 @@
 .rank-list-container{
     .rank-item {
-        display: flex;
+        // display: flex;
         border-bottom: 1px solid #e3e3e3;
+    }
+
+    .nut-collapse-item-header {
+        position: sticky;
+        top: -1px;
+        align-items: center;
+        .nut-collapse-item-icon-box {
+            display: none;
+        }
+        .rank-item-title {
+            display: flex;
+            align-items: center;
+            color: rgb(113, 113, 113);
+            .item-avatar {
+                margin-right: 8px;
+            }
+            .item-name {
+                width: 110px;
+                .item-nick-name{
+                    flex-direction: column;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    max-width: 100%;
+                }
+            }
+        }
+        .nut-collapse-item-extra{
+            padding: 0;
+            .extra-cell{
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                .best-score{
+                    font-weight: 500;
+                }
+                .total-lap{
+                    color: rgb(113, 113, 113);
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    
+    .rank-item-record-list{
+        font-size: 24px;
+        color: rgb(193, 190, 190);
+        .rank-item-detail-item, .detail-item-th{
+            display: flex;
+            justify-content: space-between;
+            view {
+                text-align: left;
+                // flex: 1;
+            }
+        }
+        
+        .detail-item-th{
+            color: rgb(180, 176, 176);
+        }
+        .rank-item-detail-item{
+            .detail-item-no{
+                font-style: italic;
+            }
+            .detail-item-score {
+                font-weight: 500;
+            }
+            .detail-item-recordtime{
+                width: 100px;
+            }
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.02)
+        }
     }
 }
