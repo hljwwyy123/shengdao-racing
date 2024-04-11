@@ -4,15 +4,14 @@ import { View } from '@tarojs/components'
 import { Collapse, Image, Toast, Button, PullToRefresh } from "@nutui/nutui-react-taro"
 import moment from "moment"
 import { randomScore, aggregateRealTimeData } from "../../utils"
-import './index.less'
 import { DEFAULT_AVATAR } from '../../constant'
 import { REAL_SCORE_ITEM, SCORE_DETAIL_ITEM } from 'src/type/realTime'
+import './index.less'
 
 
 export default function Index() {
   const [rankList, setRankList] = useState<any>([]);
   const [loading, setLoading] = useState(false);
-  const [loadingText, setLoadingText] = useState("...");
   const [activeCollspan, setActiveCollspan] = useState<string[]>([])
 
   useEffect(() => {
@@ -24,18 +23,18 @@ export default function Index() {
       name: 'post_score_fromlocal',
       data: {
         body: [
-          // {
-          //   "car_name":"26号",
-          //   "dateTime":1712136373670,
-          //   "lap_create_time": nowTime,
-          //   "single_score": randomScore(),
-          // },
           {
-            "car_name":"28号",
+            "car_name":"26号",
             "dateTime":1712136373670,
             "lap_create_time": nowTime,
             "single_score": randomScore(),
           },
+          // {
+          //   "car_name":"28号",
+          //   "dateTime":1712136373670,
+          //   "lap_create_time": nowTime,
+          //   "single_score": randomScore(),
+          // },
           // {
           //   "car_name":"5号",
           //   "dateTime":1712136373670,

@@ -1,25 +1,29 @@
+Page { background-color: #1f232d; }
 .rank-list-container{
     .rank-item {
         // display: flex;
-        border-bottom: 1px solid #e3e3e3;
+        // border-bottom: 1px solid #8d8a8a;
+        margin: 2px 0;
+        background-color: #30333e;
     }
 
     .nut-collapse-item-header {
         position: sticky;
         top: -1px;
         align-items: center;
+        background-color: #1f232d;
         .nut-collapse-item-icon-box {
             display: none;
         }
         .rank-item-title {
             display: flex;
             align-items: center;
-            color: rgb(113, 113, 113);
             .item-avatar {
                 margin-right: 8px;
             }
             .item-name {
                 width: 110px;
+                color: rgba(255, 255, 255, 0.739);
                 .item-nick-name{
                     flex-direction: column;
                     white-space: nowrap;
@@ -37,9 +41,9 @@
                 justify-content: space-between;
                 .best-score{
                     font-weight: 500;
+                    color: white;
                 }
                 .total-lap{
-                    color: rgb(113, 113, 113);
                     font-size: 12px;
                 }
             }
@@ -74,5 +78,8 @@
             padding: 4px 0;
             border-bottom: 1px solid rgba(0,0,0,0.02)
         }
+    }
+    .nut-collapse-item-content{
+        background-color: #333640f9;
     }
 }

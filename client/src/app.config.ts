@@ -8,7 +8,8 @@ export default {
   tabBar: {
     // custom: true,
     color: '#707070',
-    selectedColor: '#fa2f20',
+    selectedColor: 'white',
+    backgroundColor: '#1f232d',
     list: [
       {
         pagePath: 'pages/index/index',
@@ -32,9 +33,10 @@ export default {
   },
   window: {
     backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
+    navigationBarBackgroundColor: '#1f232d',
+    navigationBarTitleText: '圈速榜',
+    navigationBarTextStyle: 'black',
+    backgroundColor: '#1f232d'
   },
   cloud: true,
 }
