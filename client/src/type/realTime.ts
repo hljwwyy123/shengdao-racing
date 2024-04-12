@@ -3,6 +3,7 @@ export type REAL_SCORE_ITEM = {
   last_lap_time: string
   nickName: string
   avatar: string
+  single_score?: number
   gender: 0 | 1 | 2
   bestScore: string
   bestScoreLapTime: string

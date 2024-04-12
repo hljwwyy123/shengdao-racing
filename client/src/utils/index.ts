@@ -52,6 +52,7 @@ export function aggregateRealTimeData(data) {
                 avatar: bestRecord.avatar,
                 gender: bestRecord.gender,
                 bestScore: bestRecord.lapTime,
+                single_score: bestRecord.single_score,
                 bestScoreLapTime: bestRecord.lap_create_time_hour,
                 records: formattedRecords,
                 totalLap: records.length

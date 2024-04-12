@@ -1,4 +1,15 @@
 Page { background-color: #1f232d; }
+.rank-th{
+    color: rgb(180, 176, 176);
+    display: flex;
+    font-size: 24px;
+    justify-content: space-between;
+    padding: var(--nutui-collapse-item-padding, 13px 26px);
+    &:first-child {
+        margin-left: 30px;
+    }
+
+}
 .rank-list-container{
     .rank-item {
         // display: flex;
@@ -81,5 +92,12 @@ Page { background-color: #1f232d; }
     }
     .nut-collapse-item-content{
         background-color: #333640f9;
+    }
+}
+.rank-no-list-container {
+    .rank-item{
+        display: flex;
+        justify-content: space-between;
+        color: white;
     }
 }
