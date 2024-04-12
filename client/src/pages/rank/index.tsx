@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import Taro, { Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { Button } from "@nutui/nutui-react-taro"
-
-
-import './rank.less'
+import RankBGImage from "./rank-bg.png"
 import EmptyContent from '../../components/EmptyContent'
+import './rank.less'
 
 
 export default function Mine() {
@@ -27,10 +25,22 @@ export default function Mine() {
     setLoading(false)
   }
 
+  if (!rankList.length && !loading) {
+    return <EmptyContent />
+  }
+
   return (
     <View className='mine-container'>
-      总排行榜
-      { !rankList.length && !loading && <EmptyContent />}
+      <div className='rank-top-container'>
+        <TopRankUserInfo rankInfo={rankList[0]} />
+        <img className='rank-bottom-bg' src={RankBGImage} />
+      </div>
     </View>
   )
+}
+
+function TopRankUserInfo (p: any) {
+  return <div className='top-rank-user-info'>
+    
+  </div>
 }

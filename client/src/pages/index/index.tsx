@@ -3,6 +3,7 @@ import Taro, { Config } from '@tarojs/taro'
 import { Collapse, Image, Button, PullToRefresh } from "@nutui/nutui-react-taro"
 import moment from "moment"
 import { randomScore, aggregateRealTimeData } from "../../utils"
+import RankBGImage from "./rank-bg.png"
 import { DEFAULT_AVATAR } from '../../constant'
 import { REAL_SCORE_ITEM, SCORE_DETAIL_ITEM } from 'src/type/realTime'
 import TabBar from "../../components/TabBar"
@@ -31,7 +32,7 @@ export default function Index() {
       data: {
         body: [
           {
-            "car_name":"26号",
+            "car_name":"24号",
             "dateTime":1712136373670,
             "lap_create_time": nowTime,
             "single_score": randomScore(),
@@ -114,7 +115,7 @@ export default function Index() {
         >
           <div className='rank-th'>
             <div>选手</div>
-            <div>圈速</div>
+            <div className='th-score'>圈速</div>
             <div>总圈数</div>
           </div>
           { !rankList.length && !loading && <EmptyContent text='暂无数据哦~' />}
@@ -163,14 +164,20 @@ export default function Index() {
         <div className='rank-no-list-container'>
           <div className='rank-th'>
             <div>排名</div>
-            <div>选手</div>
+            <div className='rank-no-score'>选手</div>
             <div>圈速</div>
           </div>
           { !rankList.length && !loading && <EmptyContent text='暂无数据哦~' />}
           {
             rankNoList.map((record, no) => <div className='rank-item'>
-              <div className='noth'>{no + 1}</div>
-              <div className='item-name'>
+              <div className='noth-cell'>
+                <div className={`noth ${no < 3 ? `th-${no+1}` : ''}`}>
+                  {
+                    no >= 3 && <span>{no + 1}</span>
+                  }
+                </div>
+              </div>
+              <div className='rank-item-title'>
                 <Image className='item-avatar' src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                 <div className='item-name'>
                   <div>{record.timer_num}</div>

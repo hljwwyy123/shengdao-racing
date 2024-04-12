@@ -30,6 +30,7 @@ export default function BindWXTimer() {
     
     form.setFieldsValue({ timerCode: timer })
     form.setFieldsValue({ nickName: _userInfo.nickName })
+    
   }, [])
 
   const doBind = async (values) => {
@@ -42,10 +43,14 @@ export default function BindWXTimer() {
       }
     });
     if (bindRes) {
-      console.log({bindRes})
       Taro.showModal({
         title: "绑定成功",
-        content: "加油吧~"
+        content: "加油吧~",
+        success: () => {
+          Taro.switchTab({
+            url: '/pages/index/index'
+          })
+        }
       })
     }
   }

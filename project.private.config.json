@@ -10,7 +10,7 @@
         {
           "name": "扫码计时器",
           "pathName": "pages/scanQRCode/index",
-          "query": "timer=28号",
+          "query": "timer=24号",
           "launchMode": "default",
           "scene": null
         }

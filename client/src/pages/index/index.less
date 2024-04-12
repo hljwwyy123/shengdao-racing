@@ -4,13 +4,20 @@ Page { background-color: #1f232d; }
     display: flex;
     font-size: 24px;
     justify-content: space-between;
-    padding: var(--nutui-collapse-item-padding, 13px 26px);
-    &:first-child {
-        margin-left: 30px;
+    padding: 24rpx 40rpx 24rpx;
+    border-width: 0 0 1px 0;
+    border-color: rgba(255, 255, 255, 0.1);
+    border-style: dashed;
+    background: #181818;
+    .th-score {
+        margin-left: 34px;
     }
-
+    .rank-no-score{
+        margin-left: -90px;
+    }
 }
-.rank-list-container{
+
+.rank-list-container {
     .rank-item {
         // display: flex;
         // border-bottom: 1px solid #8d8a8a;
@@ -18,11 +25,21 @@ Page { background-color: #1f232d; }
         background-color: #30333e;
     }
 
+    .rank-th :first-child{
+        margin-left: 30px;
+    }
+    .rank-th {
+        
+        .th-score{
+            margin-left: 60px;
+        }
+    }
     .nut-collapse-item-header {
         position: sticky;
         top: -1px;
         align-items: center;
-        background-color: #1f232d;
+        // background-color: #1f232d;
+        background: #181818;
         .nut-collapse-item-icon-box {
             display: none;
         }
@@ -75,6 +92,9 @@ Page { background-color: #1f232d; }
         
         .detail-item-th{
             color: rgb(180, 176, 176);
+            .detail-item-score {
+                margin-left:70px;
+            }
         }
         .rank-item-detail-item{
             .detail-item-no{
@@ -82,6 +102,7 @@ Page { background-color: #1f232d; }
             }
             .detail-item-score {
                 font-weight: 500;
+                margin-left: 110px;
             }
             .detail-item-recordtime{
                 width: 100px;
@@ -94,10 +115,79 @@ Page { background-color: #1f232d; }
         background-color: #333640f9;
     }
 }
+
 .rank-no-list-container {
+    padding: var(--nutui-collapse-item-padding, 13px 26px);
+    
+    .rank-th {
+        text-align: left;
+        flex: 1;
+        background: #181818;
+        border-radius: 24px 24px 0 0;
+        padding: 24rpx 46rpx 24rpx 50rpx;
+    }
     .rank-item{
         display: flex;
         justify-content: space-between;
-        color: white;
+        // padding-left: 60px;
+        background: #181818;
+        padding: 40px 40px 40px 60px;
+        margin-bottom: 4px;
+        box-sizing: border-box;
+        font-size: 24px;
+        color: #A4A4A4;
+        align-items: center;
+        .noth-cell {
+            width: 100px;
+            .noth {
+                margin-left: 4px;
+                &.th-1 {
+                    margin-left: -6rpx;
+                    width: 44rpx;
+                    height: 52rpx;
+                    background: url('../../assets/rank-1.png') no-repeat;
+                    background-size: 44rpx 52rpx
+                    
+                }
+                &.th-2 {
+                    margin-left: -6rpx;
+                    width: 44rpx;
+                    height: 52rpx;
+                    background: url('../../assets/rank-2.png') no-repeat;
+                    background-size: 100% 100%;
+                    
+                }
+                &.th-3 {
+                    margin-left: -6rpx;
+                    width: 44rpx;
+                    height: 52rpx;
+                    background: url('../../assets/rank-3.png') no-repeat;
+                    background-size: 100% 100%;
+                    
+                }
+            }
+        }
+        .item-score {
+            font-weight: 500;
+        }
+        .rank-item-title {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            .item-avatar {
+                margin-right: 8px;
+            }
+            .item-name {
+                width: 110px;
+                color: rgba(255, 255, 255, 0.739);
+                .item-nick-name{
+                    flex-direction: column;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    max-width: 100%;
+                }
+            }
+        }
     }
 }
