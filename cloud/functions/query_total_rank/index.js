@@ -45,16 +45,3 @@ exports.main = async (event, context) => {
 
     return data
 }
-
-
-// 根据指定字段对数组进行分组
-function groupBy(arr, key) {
-    return arr.reduce((acc, obj) => {
-        const groupKey = obj[key];
-        if (!acc[groupKey]) {
-            acc[groupKey] = [];
-        }
-        acc[groupKey].push(obj);
-        return acc;
-    }, {});
-}

@@ -5,6 +5,7 @@ import { Button } from "@nutui/nutui-react-taro"
 
 
 import './rank.less'
+import EmptyContent from '../../components/EmptyContent'
 
 
 export default function Mine() {
@@ -20,17 +21,16 @@ export default function Mine() {
     const { result } = await Taro.cloud.callFunction({
       name: 'query_total_rank',
     });
-    // const listData = aggregateRealTimeData(result)
 
     console.log({result})
-    // setRankList(result.data)
-    // setLoading(false)
+    setRankList(result)
+    setLoading(false)
   }
 
   return (
     <View className='mine-container'>
       总排行榜
-      <Button onClick={getRankData}>获取数据</Button>
+      { !rankList.length && !loading && <EmptyContent />}
     </View>
   )
 }

@@ -6,6 +6,7 @@ import moment from "moment"
 import { randomScore, aggregateRealTimeData } from "../../utils"
 import { DEFAULT_AVATAR } from '../../constant'
 import { REAL_SCORE_ITEM, SCORE_DETAIL_ITEM } from 'src/type/realTime'
+import EmptyContent from '../../components/EmptyContent'
 import './index.less'
 
 
@@ -17,6 +18,7 @@ export default function Index() {
   useEffect(() => {
     getRealTimeScore()
   }, [])
+
   const postdata = async () => {
     const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
     await Taro.cloud.callFunction({
@@ -61,8 +63,6 @@ export default function Index() {
   
   const onCollspanChange = (
     activeName: string | string[],
-    name: string,
-    isOpen: boolean
   ) => {
     setActiveCollspan([activeName[activeName.length - 1]] as string[])
   }
@@ -72,6 +72,7 @@ export default function Index() {
       <View>
         <Button onClick={postdata} type='primary'>模拟本地node提交数据</Button>
       </View>
+      { !rankList.length && !loading && <EmptyContent text='暂无数据哦~' />}
       <PullToRefresh 
         // pullingText=" "
         // refreshingText=" "
@@ -100,6 +101,7 @@ export default function Index() {
           )
         }}
       >
+        
         <Collapse activeName={activeCollspan} className='rank-list-container' onChange={onCollspanChange}>
           {
             rankList.map((record: REAL_SCORE_ITEM) => <Collapse.Item 

@@ -3,17 +3,18 @@ export default {
     'pages/index/index',
     'pages/scanQRCode/index',
     'pages/rank/index',
-    'pages/my/index'
+    'pages/my/index',
+    'pages/bindWXTimer/index'
   ],
   tabBar: {
     // custom: true,
-    color: '#707070',
-    selectedColor: 'white',
+    color: '#fff',
+    selectedColor: '#f53d4d',
     backgroundColor: '#1f232d',
     list: [
       {
         pagePath: 'pages/index/index',
-        text: '实时',
+        text: '圈速数据',
         iconPath: 'assets/images/rank.png',
         selectedIconPath: 'assets/images/rank-active.png',
       },
