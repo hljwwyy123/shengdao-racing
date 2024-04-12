@@ -1,5 +1,5 @@
 import moment from "moment";
-import { REAL_SCORE_ITEM } from "src/type/realTime";
+import { REAL_SCORE_ITEM } from "../type/realTime";
 
 export function randomScore() {
     return getRandomBetween(90000, 100000)

@@ -12,7 +12,7 @@ import cloneDeep from 'lodash.clonedeep'
 import './index.less'
 
 let initedFetch = false;
-const TAB_LIST = ['实时成绩', '实时榜单'];
+const TAB_LIST = ['实时成绩', '今日榜单'];
 
 export default function Index() {
   const [rankList, setRankList] = useState<any>([]);
