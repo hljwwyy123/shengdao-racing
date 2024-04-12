@@ -35,7 +35,7 @@ export default {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#1f232d',
     navigationBarTitleText: '圈速榜',
-    navigationBarTextStyle: 'black',
+    navigationBarTextStyle: 'white',
     backgroundColor: '#1f232d'
   },
   cloud: true,
