@@ -32,7 +32,6 @@ export default function Mine() {
   return (
     <View className='mine-container'>
       <div className='section-title'>我的数据</div>
-      <Button onClick={getMyRank}>查询</Button>
       <Grid columns={2}>
         <Grid.Item text="最快圈速">
           {bestScoreInfo?.single_score ? formatMilliseconds(bestScoreInfo?.single_score) : "-"}
