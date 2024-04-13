@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Taro, { Config } from '@tarojs/taro'
+import Taro, { useShareAppMessage } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { Image } from "@nutui/nutui-react-taro"
 import RankBGImage from "./rank-bg.png"
@@ -20,6 +20,13 @@ export default function Mine() {
   useEffect(() => {
     getRankData()
   }, [])
+
+  useShareAppMessage(() => {
+    return {
+      title: '胜道巅峰榜', // 分享标题
+      path: '/pages/rank/index', // 分享路径，通常为当前页面路径
+    };
+  });
 
   const getRankData = async () => {
     setLoading(true)
@@ -49,7 +56,7 @@ export default function Mine() {
     <View className='total-rank-container'>
       <TabBar tabList={TAB_LIST} onTabChange={(e) => setActiveTab(e)}/>
       <div className='rank-top-container'>
-        { rankList.length && <TopRankUserInfo rankInfo={rankList[0]} rank={1} /> }
+        { !!rankList.length && <TopRankUserInfo rankInfo={rankList[0]} rank={1} /> }
         { rankList.length > 1 && <TopRankUserInfo rankInfo={rankList[1]} rank={2} /> }
         { rankList.length > 2 && <TopRankUserInfo rankInfo={rankList[2]} rank={3} /> }
         <Image className='rank-bottom-bg' src={RankBGImage}  width={'100%'} height={170}  />

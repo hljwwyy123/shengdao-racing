@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Taro, { Config } from '@tarojs/taro'
+import Taro, { useShareAppMessage } from '@tarojs/taro'
 import { Collapse } from "@nutui/nutui-react-taro"
 import { ArrowRight, ArrowDown } from '@nutui/icons-react-taro'
 import EmptyContent from '../../components/EmptyContent'
@@ -13,6 +13,13 @@ export default function History() {
     useEffect(() => {
         getHistoryData()
     }, [])
+
+    useShareAppMessage(() => {
+        return {
+          title: '我的胜道赛道成绩', // 分享标题
+          path: '/pages/history/index', // 分享路径，通常为当前页面路径
+        };
+      });
 
     const getHistoryData = async () => {
         Taro.showLoading()

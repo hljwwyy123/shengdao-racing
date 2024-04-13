@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Taro, { Config } from '@tarojs/taro'
+import Taro, { useShareAppMessage } from '@tarojs/taro'
 import { Collapse, Image, Button, PullToRefresh } from "@nutui/nutui-react-taro"
 import { ArrowRight, ArrowDown } from '@nutui/icons-react-taro'
 import moment from "moment"
@@ -24,6 +24,13 @@ export default function Index() {
   useEffect(() => {
     getRealTimeScore()
   }, [])
+
+  useShareAppMessage(() => {
+    return {
+      title: '胜道巅峰榜', // 分享标题
+      path: '/pages/index/index', // 分享路径，通常为当前页面路径
+    };
+  });
 
   const postdata = async () => {
     const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');

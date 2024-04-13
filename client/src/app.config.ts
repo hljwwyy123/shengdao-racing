@@ -1,9 +1,9 @@
 export default {
   pages: [
-    'pages/index/index',
-    'pages/scanQRCode/index',
     'pages/rank/index',
+    'pages/index/index',
     'pages/my/index',
+    'pages/scanQRCode/index',
     'pages/bindWXTimer/index',
     'pages/history/index'
   ],
