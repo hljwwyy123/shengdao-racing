@@ -1,5 +1,6 @@
 const tcb = require('@cloudbase/node-sdk')
 const cloud = require('wx-server-sdk')
+const moment = require('moment');
 
 const tcbapp = tcb.init({
     env: 'racing-7gxq1capbac7539a',
@@ -11,30 +12,31 @@ cloud.init({
 })
 
 const db = tcbapp.database({ throwOnNotFound: false })
+const _ = db.command;
+
 
 exports.main = async (event, context) => {
     const wxContext = cloud.getWXContext()
-    // 查询 racing-data 表中每个 openId 的最小 single_score，并且返回指定字段
-    const result = await db.collection('racing-data')
+    const bestScore = await db.collection('racing-data')
         .where({
             openId: wxContext.OPENID // 使用传入的 openId 进行查询
         })
         .orderBy('single_score', 'asc') // 按照 single_score 升序排序
         .get();
 
-    if (result.data.length === 0) {
+    if (bestScore.data.length === 0) {
         // 如果未查询到记录，则返回空数据
         return {
             code: 0,
             data: null
         };
     }
-    
     // 如果查询到记录，则返回最快成绩信息
     const bestRecord = {
-        record: result.data[0],
-        totalLapNum: result.data.length
+        record: bestScore.data[0],
+        totalLapNum: bestScore.data.length
     }
+
     return {
         code: 0,
         data: bestRecord

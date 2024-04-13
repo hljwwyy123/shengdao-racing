@@ -4,7 +4,8 @@ export default {
     'pages/scanQRCode/index',
     'pages/rank/index',
     'pages/my/index',
-    'pages/bindWXTimer/index'
+    'pages/bindWXTimer/index',
+    'pages/history/index'
   ],
   tabBar: {
     // custom: true,

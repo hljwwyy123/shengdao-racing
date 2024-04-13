@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import Taro, { Config } from '@tarojs/taro'
 import { Collapse, Image, Button, PullToRefresh } from "@nutui/nutui-react-taro"
+import { ArrowRight, ArrowDown } from '@nutui/icons-react-taro'
 import moment from "moment"
 import { randomScore, aggregateRealTimeData } from "../../utils"
-import RankBGImage from "./rank-bg.png"
 import { DEFAULT_AVATAR } from '../../constant'
 import { REAL_SCORE_ITEM, SCORE_DETAIL_ITEM } from 'src/type/realTime'
 import TabBar from "../../components/TabBar"
@@ -65,6 +65,7 @@ export default function Index() {
     const listData = aggregateRealTimeData(result)
     setRankList(listData)
     const _rankList = cloneDeep(listData)
+    console.log(_rankList)
     const noList = _rankList.sort((a, b) => a.single_score - b.single_score);
     setRankNoList(noList)
     setLoading(false)
@@ -75,6 +76,7 @@ export default function Index() {
   const onCollspanChange = (
     activeName: string | string[],
   ) => {
+    console.log('activeName -- ',[activeName[activeName.length - 1]] as string[])
     setActiveCollspan([activeName[activeName.length - 1]] as string[])
 
   }
@@ -121,7 +123,7 @@ export default function Index() {
           { !rankList.length && !loading && <EmptyContent text='暂无数据哦~' />}
           <Collapse activeName={activeCollspan} className='rank-list-container' onChange={onCollspanChange}>
             {
-              rankList.map((record: REAL_SCORE_ITEM) => <Collapse.Item 
+              rankList.map((record: REAL_SCORE_ITEM, index: number) => <Collapse.Item 
                 name={record.timer_num}
                 className='rank-item'
                 title={<div className='rank-item-title'>
@@ -135,7 +137,7 @@ export default function Index() {
                 extra={
                   <div className='extra-cell'>
                     <div className='best-score'>{record.bestScore}</div>
-                    <div className='total-lap'><b>{record.totalLap}</b></div>
+                    <div className='total-lap'><b>{record.totalLap}</b>{ record.timer_num === activeCollspan[0] ? <ArrowDown /> : <ArrowRight />}</div>
                   </div>
                 }
               >

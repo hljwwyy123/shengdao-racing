@@ -23,6 +23,7 @@ export default function Mine() {
 
   const getRankData = async () => {
     setLoading(true)
+    Taro.showLoading()
     const { result } = await Taro.cloud.callFunction({
       name: 'query_total_rank',
     });
@@ -36,6 +37,7 @@ export default function Mine() {
     setRankList(rankList)
     const testData = new Array(20).fill(rankList[0])
     setRankList(testData)
+    Taro.hideLoading()
     setLoading(false)
   }
 

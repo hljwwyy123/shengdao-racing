@@ -19,7 +19,6 @@ exports.main = async (event, context) => {
       })
       .get();
     const rank = groupBy(result.data, 'timer_num');
-    console.log(rank)
     return rank
 }
 // 获取当天日期的正则表达式

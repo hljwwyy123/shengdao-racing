@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "我的历史数据",
+          "pathName": "pages/history/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "扫码计时器",
           "pathName": "pages/scanQRCode/index",
           "query": "timer=24号",

@@ -62,3 +62,35 @@ export function aggregateRealTimeData(data) {
     aggregatedData.sort((a, b) => new Date(b.last_lap_time.replace(/-/g, '/')).getTime() - new Date(a.last_lap_time.replace(/-/g, '/')).getTime());
     return aggregatedData;
 }
+
+export function aggregateMyHistoryData(data) {
+    const aggregatedData: REAL_SCORE_ITEM[] = [];
+
+    for (const timerNum in data) {
+        if (data.hasOwnProperty(timerNum)) {
+            const records = data[timerNum];
+            // 按 lap_create_time 进行倒序排序
+            records.sort((a, b) => new Date(b.lap_create_time.replace(/-/g, '/')).getTime() - new Date(a.lap_create_time.replace(/-/g, '/')).getTime());
+            const bestRecord = records.slice().sort((a, b) => a.single_score - b.single_score)[0];
+            const formattedRecords = records.map(record => {
+                record.lapTime = formatMilliseconds(record.single_score);
+                record.lap_create_time_hour = moment(record.lap_create_time).format('HH:mm:ss')
+                return record;
+            });
+            aggregatedData.push({
+                timer_num: timerNum,
+                last_lap_time: records[0].lap_create_time,
+                nickName: bestRecord.nickName,
+                avatar: bestRecord.avatar,
+                gender: bestRecord.gender,
+                bestScore: bestRecord.lapTime,
+                single_score: bestRecord.single_score,
+                bestScoreLapTime: bestRecord.lap_create_time_hour,
+                records: formattedRecords,
+                totalLap: records.length
+            });
+        }
+    }
+    aggregatedData.sort((a, b) => new Date(b.last_lap_time.replace(/-/g, '/')).getTime() - new Date(a.last_lap_time.replace(/-/g, '/')).getTime());
+    return aggregatedData;
+}
