@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Taro, { Config, useRouter } from '@tarojs/taro'
 import { Button, Form, Picker, Image, Input, Divider } from "@nutui/nutui-react-taro"
 import { DEFAULT_AVATAR, DEFAULT_GROUP, DISPLACEMENT } from '../../constant'
+import { getOpenId } from "../../utils"
 import CustomNoticeBar from '../../components/NoticeBar'
 import "./bind.less"
 
@@ -13,33 +14,53 @@ interface Params {
 
 export default function BindWXTimer() {
   const [timerCode, setTimerCode] = useState<string>('');
-  const [userInfo, setUserInfo] = useState<any>({});
+  const [avatar, setAvatar] = useState<string>("");
+  const [avatarFileId, setAvatarFileId] = useState<string>("");
   const [groupDataSource] = useState<any[]>(DEFAULT_GROUP);
   const [displacementDataSource] = useState<any[]>(DISPLACEMENT);
   const [showGroupPicker, setShowGroupPicker] = useState<boolean>(false);
   const [showDisplacementPicker, setShowDisplacementPicker] = useState<boolean>(false);
-  
+  const [openId, setOpenId] = useState<string>("");
+
   const router = useRouter<any>();
 
   useEffect(() => {
     const { params } = router as { params: Params };
-    const { timer = '', timerId = '' } = params;
+    const { timer = '' } = params;
     setTimerCode(timer)
-    const _userInfo = Taro.getStorageSync("userInfo");
-    setUserInfo(_userInfo)
-    
     form.setFieldsValue({ timerCode: timer })
-    form.setFieldsValue({ nickName: _userInfo.nickName })
-    
-  }, [])
+    getUserOpenId()
+  }, []);
+
+  const getUserOpenId = async () => {
+    const _openId = await getOpenId();
+    setOpenId(_openId)
+  }
+
+  
+  const uploadAvatar = async (e) => {
+    const tempFilePath = e.detail.avatarUrl
+    setAvatar(e.detail.avatarUrl)
+    // 调用云函数上传文件
+    try {
+      const result = await Taro.cloud.uploadFile({
+        cloudPath: `${openId}/avatar.jpg`, // 以用户的 OpenID 作为存储路径
+        filePath: tempFilePath,
+      });
+      
+      console.log('上传成功', result.fileID);
+      setAvatarFileId(result.fileID)
+    } catch (error) {
+      console.error('上传失败', error);
+    }
+  }
 
   const doBind = async (values) => {
     const bindRes = await Taro.cloud.callFunction({
       name: 'bind_wx',
       data: {
         ...values,
-        avatar: userInfo.avatar || DEFAULT_AVATAR,
-        gender: userInfo.gender, // gender 0: Unknown, 1: Male, 2: Female 
+        avatar: avatarFileId,
       }
     });
     if (bindRes) {
@@ -58,7 +79,7 @@ export default function BindWXTimer() {
 
   return <div className='bind-wx-timer'>
     <CustomNoticeBar closeable={true} text="绑定计时器仅当日有效，只有绑定微信才会记录到总排行榜" />
-    <Image className='avatar' src={userInfo.avatar || DEFAULT_AVATAR} width={80} height={80} radius={"50%"} />
+    
     <Form 
       form={form}
       onFinish={(values) => {
@@ -66,10 +87,21 @@ export default function BindWXTimer() {
       }}
       footer={
         <Button formType="submit" block type="primary">
-          提交
+          提交绑定
         </Button>
       }
     >
+      <Form.Item
+        required
+        label="头像"
+        name="avatar"
+        className='avatar-form-item'
+      >
+        <Button className='avatar-choose-btn' openType='chooseAvatar' onChooseAvatar={uploadAvatar}>
+          <Image error="点击上传"  className='avatar' src={avatar} width={80} height={80} radius={"50%"} />
+          {!avatar && <div className='upload-tip'>点击上传</div>}
+        </Button>
+      </Form.Item>
       <Form.Item
         required
         label="昵称"
@@ -142,7 +174,7 @@ export default function BindWXTimer() {
         setShowDisplacementPicker(false);
         form.setFieldsValue({ displacement: selectValue[0] })
       }}
-      onCancel={() => setShowGroupPicker(false)}
+      onCancel={() => setShowDisplacementPicker(false)}
     />
   </div>
 }

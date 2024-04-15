@@ -1,5 +1,18 @@
 import moment from "moment";
+import Taro from "@tarojs/taro"
 import { REAL_SCORE_ITEM } from "../type/realTime";
+
+export async function getOpenId () {
+    let _openId = Taro.getStorageSync("openId");
+    if (!_openId) {
+        const res: any = await Taro.cloud.callFunction({
+        name: 'login'
+        });
+        _openId = res.result.openid
+        Taro.setStorageSync("openId", _openId)
+    }
+    return _openId
+}
 
 export function randomScore() {
     return getRandomBetween(90000, 100000)
@@ -7,7 +20,7 @@ export function randomScore() {
 
 function getRandomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+}
 
 // 将毫秒转换成分钟和秒的形式
 export function formatMilliseconds(milliseconds) {

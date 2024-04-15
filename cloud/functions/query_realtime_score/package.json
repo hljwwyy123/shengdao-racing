@@ -9,7 +9,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "@cloudbase/node-sdk": "^2.11.0"
+      "@cloudbase/node-sdk": "^2.11.0",
+      "wx-server-sdk": "latest"
     }
   }
   

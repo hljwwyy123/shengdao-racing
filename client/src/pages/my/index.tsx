@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import Taro, { Config, requirePlugin } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { Grid, Button, Cell } from "@nutui/nutui-react-taro"
+import { Image, Grid, Button, Cell } from "@nutui/nutui-react-taro"
 import { Comment, List, Flag, Notice, ArrowRight } from '@nutui/icons-react-taro'
-import { formatMilliseconds } from '../../utils'
+import { formatMilliseconds, getOpenId } from '../../utils'
 const commentPlugin = Taro.requirePlugin("wxacommentplugin");
 import './my.less'
 
@@ -11,9 +11,11 @@ import './my.less'
 export default function Mine() {
   const [bestScoreInfo, setBestScoreInfo] = useState<any>({});
   const [totalLapNum, setTotalLapNum] = useState<number>(0);
+  const [openId, setOpenId] = useState<string>('')
 
   useEffect(() => {
     getMyRank()
+    getOpenId().then(res => setOpenId(res))
   }, []);
 
   const getMyRank = async () => {
@@ -29,29 +31,6 @@ export default function Mine() {
     Taro.hideLoading()
   }
 
-  const uploadAvatar = (e) => {
-    console.log(e)
-  }
-
-  const getUserInfo = () => {
-    Taro.showToast({
-      title: Taro.canIUse('getUserProfile') + ''
-    })
-    Taro.getUserProfile({
-      desc: '用于在排行榜中展示信息',
-      success: (e: any) => {
-        const { avatar, nickName, gender } = e.userInfo;
-        console.log({avatar, nickName, gender})
-        Taro.showToast({
-          title: nickName + '-' + gender
-        })
-        // Taro.setStorageSync("userInfo", e.userInfo)
-        // Taro.navigateTo({
-        //   url: '/pages/bindWXTimer/index?timer='+timerCode
-        // })
-      }
-    })
-  }
 
   return (
     <View className='mine-container'>
@@ -64,7 +43,6 @@ export default function Mine() {
         {totalLapNum}圈
         </Grid.Item>
       </Grid>
-      <Button openType='chooseAvatar' onChooseAvatar={uploadAvatar}>选择头像</Button>
       <Cell 
         extra={<ArrowRight />} 
         onClick={() => Taro.navigateTo({url: '/pages/history/index'})}
@@ -74,13 +52,6 @@ export default function Mine() {
         </div>}
       />
       <div className='section-title'>赛场</div>
-      <Cell
-        onClick={getUserInfo}
-         title={<div style={{ display: 'inline-flex', alignItems: 'center' }}>
-          <Flag />
-          <span style={{ marginLeft: '5px' }}>授权</span>
-        </div>}
-      />
       <Cell title={<div style={{ display: 'inline-flex', alignItems: 'center' }}>
           <Flag />
           <span style={{ marginLeft: '5px' }}>关于赛场</span>

@@ -48,12 +48,7 @@ export default function ScanCode() {
       text='绑定计时器仅当日有效，只有绑定微信才会记录到总排行榜'
     />
     <div className='timer-code'>{timerCode}</div>
-    {
-      useProfile ?
-      <Button type='primary' onClick={onBind}>填写信息，绑定计时器</Button>
-      :
-      <Button openType='getUserInfo'>填写信息，绑定计时器</Button>
-    }
+    
   </div>
 }
 

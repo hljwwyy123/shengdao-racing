@@ -10,6 +10,27 @@
     "miniprogram": {
       "list": [
         {
+          "name": "绑定计时器",
+          "pathName": "pages/bindWXTimer/index",
+          "query": "timer=25号",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "巅峰榜",
+          "pathName": "pages/rank/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "我得",
+          "pathName": "pages/my/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "我的历史数据",
           "pathName": "pages/history/index",
           "query": "",

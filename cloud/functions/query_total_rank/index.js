@@ -1,10 +1,16 @@
 const tcb = require('@cloudbase/node-sdk')
-
+const cloud = require('wx-server-sdk')
 
 const tcbapp = tcb.init({
     env: 'racing-7gxq1capbac7539a',
     region: "ap-shanghai",
 });
+
+// 初始化 cloud
+cloud.init({
+  // API 调用都保持和云函数当前所在环境一致
+  env: 'racing-7gxq1capbac7539a'
+})
 
 const db = tcbapp.database({ throwOnNotFound: false })
 
@@ -31,13 +37,22 @@ exports.main = async (event, context) => {
         })
         .limit(1) // 只查询一条记录
         .get();
-
+      let avatarUrl = "";
+      if (record.data[0].avatar) {
+        const result = await cloud.getTempFileURL({
+          fileList: [record.data[0].avatar]
+        });
+        if (result.fileList && result.fileList.length) {
+          avatarUrl = result.fileList[0].tempFileURL;
+        }
+      }
+      
       return {
         openId: item._id,
         single_score: item.min_single_score,
         nick_name: record.data[0].nickName,
         car_name: record.data[0].car_name,
-        avatar: record.data[0].avatar,
+        avatar: avatarUrl,
         gender: record.data[0].gender,
         lap_create_time: record.data[0].lap_create_time,
       };

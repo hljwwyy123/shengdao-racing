@@ -56,7 +56,7 @@ const TIMER_CODE_LIST = [
     "37号",
     "38号",
     "39号"];
-const path = 'pages/scanQRCode/index?timer=';  // 你希望二维码扫描后跳转的页面路径和参数
+const path = 'pages/bindWXTimer/index?timer=';  // 你希望二维码扫描后跳转的页面路径和参数
 
 async function getAccessToken() {
     const response = await axios.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appid}&secret=${appsecret}`);

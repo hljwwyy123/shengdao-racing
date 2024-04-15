@@ -94,7 +94,7 @@ export default function Mine() {
 function TopRankUserInfo (props: any) {
   const { rankInfo, rank} = props;
   return <div className={`top-rank-user-info rank-${rank}`}>
-    <Image className='top-avatar' src={rankInfo?.avatar} width={50} height={50} radius={"50%"}/>
+    <Image lazyLoad className='top-avatar' src={rankInfo?.avatar} width={50} height={50} radius={"50%"}/>
     <div className='nick-name'>{rankInfo.nick_name}</div>
     <div className='best-score'>{rankInfo.lap_time}</div>
   </div>

@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import Taro, { useShareAppMessage } from '@tarojs/taro'
 import { Collapse, Image, Button, PullToRefresh } from "@nutui/nutui-react-taro"
 import { ArrowRight, ArrowDown } from '@nutui/icons-react-taro'
-import moment from "moment"
-import { randomScore, aggregateRealTimeData } from "../../utils"
+import { aggregateRealTimeData } from "../../utils"
 import { DEFAULT_AVATAR } from '../../constant'
 import { REAL_SCORE_ITEM, SCORE_DETAIL_ITEM } from 'src/type/realTime'
 import TabBar from "../../components/TabBar"
@@ -32,37 +31,6 @@ export default function Index() {
     };
   });
 
-  const postdata = async () => {
-    const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
-    await Taro.cloud.callFunction({
-      name: 'post_score_fromlocal',
-      data: {
-        body: [
-          {
-            "car_name":"24号",
-            "dateTime":1712136373670,
-            "lap_create_time": nowTime,
-            "single_score": randomScore(),
-          },
-          // {
-          //   "car_name":"28号",
-          //   "dateTime":1712136373670,
-          //   "lap_create_time": nowTime,
-          //   "single_score": randomScore(),
-          // },
-          // {
-          //   "car_name":"5号",
-          //   "dateTime":1712136373670,
-          //   "lap_create_time": nowTime,
-          //   "single_score": randomScore(),
-          // },
-        ]
-      }
-
-    })
-    getRealTimeScore()
-  }
-
   const getRealTimeScore = async () => {
     !initedFetch && Taro.showLoading()
     setLoading(true)
@@ -72,7 +40,7 @@ export default function Index() {
     const listData = aggregateRealTimeData(result)
     setRankList(listData)
     const _rankList = cloneDeep(listData)
-    console.log(_rankList)
+    console.log({_rankList})
     const noList = _rankList.sort((a, b) => a.single_score - b.single_score);
     setRankNoList(noList)
     setLoading(false)
@@ -134,7 +102,7 @@ export default function Index() {
                 name={record.timer_num}
                 className='rank-item'
                 title={<div className='rank-item-title'>
-                  <Image className='item-avatar' src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
+                  <Image className='item-avatar' lazyLoad src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                   <div className='item-name'>
                     <div>{record.timer_num}</div>
                     <div>{record.nickName ? `${record.nickName}` : ''}</div>

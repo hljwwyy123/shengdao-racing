@@ -38,16 +38,16 @@ function sendHttpRequest(data) {
     const currentTime = moment().format('YYYY-MM-DD HH:mm:ss');
     const res = await sendHttpRequest([
       {
-        "car_name":"26号",
+        "car_name":"25号",
         "dateTime":1712136373670,
         "lap_create_time": currentTime,
-        "single_score": 99999,
+        "single_score": 86890,
       },
       {
-        "car_name":"28号",
+        "car_name":"24号",
         "dateTime":1712136373670,
         "lap_create_time": currentTime,
-        "single_score": 33333,
+        "single_score": 86900,
       },
     ]);
     console.log('上报成功：',res)
