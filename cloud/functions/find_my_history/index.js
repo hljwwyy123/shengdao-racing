@@ -42,6 +42,7 @@ exports.main = async (event, context) => {
         .where({
             openId: _.eq(wxContext.OPENID)
         })
+        .orderBy('lap_create_time', 'desc')
         .get();
     const groupedData = {};
     historyResult.data.forEach(item => {
