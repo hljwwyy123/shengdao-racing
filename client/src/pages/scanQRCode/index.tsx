@@ -11,6 +11,7 @@ interface Params {
 
 export default function ScanCode() {
   const [timerCode, setTimerCode] = useState<string>('');
+  const [useProfile] = useState<boolean>(Taro.canIUse('getUserProfile'))
   const router = useRouter<any>();
 
   useEffect(() => {
@@ -22,11 +23,13 @@ export default function ScanCode() {
 
   const onBind = async () => {
     const _userInfo = Taro.getStorageSync("userInfo");
+    console.log('获取本地缓存_userinfo', _userInfo)
     if (!_userInfo) {
       Taro.getUserProfile({
         desc: '用于在排行榜中展示信息',
-        success: async (e: any) => {
-          // const { avatar, nickName, gender } = e.userInfo;
+        success: (e: any) => {
+          const { avatar, nickName, gender } = e.userInfo;
+          console.log({avatar, nickName, gender})
           Taro.setStorageSync("userInfo", e.userInfo)
           Taro.navigateTo({
             url: '/pages/bindWXTimer/index?timer='+timerCode
@@ -45,7 +48,12 @@ export default function ScanCode() {
       text='绑定计时器仅当日有效，只有绑定微信才会记录到总排行榜'
     />
     <div className='timer-code'>{timerCode}</div>
-    <Button type='primary' onClick={onBind}>填写信息，绑定计时器</Button>
+    {
+      useProfile ?
+      <Button type='primary' onClick={onBind}>填写信息，绑定计时器</Button>
+      :
+      <Button openType='getUserInfo'>填写信息，绑定计时器</Button>
+    }
   </div>
 }
 

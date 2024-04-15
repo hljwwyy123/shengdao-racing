@@ -41,4 +41,10 @@ export default {
     backgroundColor: '#1f232d'
   },
   cloud: true,
+  plugins: {
+    "wxacommentplugin": {
+      "version": "1.0.1",
+      "provider": "wx82e6ae1175f264fa" // 必须填该评价组件appid，该示例值即为评价组件appid（复制时请去掉注释）
+    }
+  }
 }

@@ -42,8 +42,6 @@ export default function Mine() {
     });
     console.log({rankList})
     setRankList(rankList)
-    const testData = new Array(20).fill(rankList[0])
-    setRankList(testData)
     Taro.hideLoading()
     setLoading(false)
   }
