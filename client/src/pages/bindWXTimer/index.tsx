@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Taro, { Config, useRouter } from '@tarojs/taro'
 import { Button, Form, Picker, Image, Input, Divider } from "@nutui/nutui-react-taro"
+import { Edit } from "@nutui/icons-react-taro"
 import { DEFAULT_AVATAR, DEFAULT_GROUP, DISPLACEMENT } from '../../constant'
 import { getOpenId } from "../../utils"
 import CustomNoticeBar from '../../components/NoticeBar'
@@ -100,6 +101,7 @@ export default function BindWXTimer() {
         <Button className='avatar-choose-btn' openType='chooseAvatar' onChooseAvatar={uploadAvatar}>
           <Image error="点击上传"  className='avatar' src={avatar} width={80} height={80} radius={"50%"} />
           {!avatar && <div className='upload-tip'>点击上传</div>}
+          {avatar && <Edit className='edit-icon' />}
         </Button>
       </Form.Item>
       <Form.Item
@@ -110,18 +112,20 @@ export default function BindWXTimer() {
         <Input
           className="nut-input-text"
           placeholder="请输入用户名，用于在排行榜展示"
-          type="text"
+          type="nickname"
         />
       </Form.Item>
       <Form.Item
         label="计时器号码"
         name="timerCode"
+        className='timer-form-item'
       >
-        <Input
-          className="nut-input-text"
+        {/* <Input
+          className="nut-input-text timer-code"
           readOnly={true}
           type="text"
-        />
+        /> */}
+        <div className='timer-code-block'>{timerCode}</div>
       </Form.Item>
       <Divider />
       <Form.Item
