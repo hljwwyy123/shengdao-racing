@@ -72,7 +72,7 @@ export default function History() {
                       record.list.map((detailItem: any, index: number) => <div className='rank-item-detail-item'>
                         <div className='detail-item-no'>{record.list.length - index}</div>
                         <div className='detail-item-score'>{detailItem.lapTime}</div>
-                        <div>{detailItem.lap_create_time_hour}</div>
+                        <div className="detail-item-recordtime">{detailItem.lap_create_time_hour}</div>
                       </div>)
                     }
                   </div>
