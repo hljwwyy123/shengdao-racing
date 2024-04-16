@@ -16,6 +16,7 @@ interface Params {
 export default function BindWXTimer() {
   const [timerCode, setTimerCode] = useState<string>('');
   const [avatar, setAvatar] = useState<string>("");
+  const [loading, setLoading] = useState(false)
   const [avatarFileId, setAvatarFileId] = useState<string>("");
   const [groupDataSource] = useState<any[]>(DEFAULT_GROUP);
   const [displacementDataSource] = useState<any[]>(DISPLACEMENT);
@@ -57,6 +58,7 @@ export default function BindWXTimer() {
   }
 
   const doBind = async (values) => {
+    setLoading(true)
     const bindRes = await Taro.cloud.callFunction({
       name: 'bind_wx',
       data: {
@@ -75,6 +77,7 @@ export default function BindWXTimer() {
         }
       })
     }
+    setLoading(false)
   }
   const [form] = Form.useForm()
 
@@ -87,7 +90,7 @@ export default function BindWXTimer() {
         doBind(values) 
       }}
       footer={
-        <Button formType="submit" block type="primary">
+        <Button loading={loading} formType="submit" block type="primary">
           提交绑定
         </Button>
       }

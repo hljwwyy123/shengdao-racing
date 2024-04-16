@@ -12,7 +12,7 @@ import './rank.less'
 
 const TAB_LIST = ['巅峰榜'];
 
-export default function Mine() {
+export default function TotalRank() {
   const [rankList, setRankList] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<number>(0)
@@ -63,6 +63,7 @@ export default function Mine() {
         <div className='rank-th'>
           <div className='rank-no'>排名</div>
           <div className='rank-user'>选手</div>
+          <div className='rank-car-name'>车型</div>
           <div className='rank-score'>圈速</div>
         </div>
         {
@@ -77,9 +78,11 @@ export default function Mine() {
               <div className='rank-item-title'>
                 <Image className='item-avatar' src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                 <div className='item-name'>
-                  <div>{record.timer_num}</div>
-                  <div>{record.nick_name ? `${record.nick_name}` : ''}</div>
+                    {record.nick_name ? `${record.nick_name}` : ''}
                 </div>
+              </div>
+              <div className='item-car-name'>
+                {record.carName}
               </div>
               <div className='item-score'>
                 {record.lap_time}

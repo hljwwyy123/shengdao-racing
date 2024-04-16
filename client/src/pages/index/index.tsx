@@ -91,8 +91,9 @@ export default function Index() {
           }}
         >
           <div className='rank-th'>
-            <div>选手</div>
+            <div className='th-auto'>选手</div>
             <div className='th-score'>圈速</div>
+            <div className='th-car-name'>车型</div>
             <div>总圈数</div>
           </div>
           { !rankList.length && !loading && <EmptyContent text='暂无数据哦~' />}
@@ -105,13 +106,19 @@ export default function Index() {
                   <Image className='item-avatar' lazyLoad src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                   <div className='item-name'>
                     <div>{record.timer_num}</div>
-                    <div>{record.nickName ? `${record.nickName}` : ''}</div>
+                    <div className='item-name-extra'>
+                      <div className='item-nick-name'>{record.nickName ? `${(record.nickName).repeat(4)}` : ''}</div>
+                    </div>
                   </div>
                   
                 </div>}
                 extra={
                   <div className='extra-cell'>
                     <div className='best-score'>{record.bestScore}</div>
+                    <div className='car-name'>
+                      {record.carName}
+                      {/* <div>{record.displacement}</div> */}
+                    </div>
                     <div className='total-lap'><b>{record.totalLap}</b>{ record.timer_num === activeCollspan[0] ? <ArrowDown /> : <ArrowRight />}</div>
                   </div>
                 }
@@ -142,6 +149,7 @@ export default function Index() {
           <div className='rank-th'>
             <div>排名</div>
             <div className='rank-no-score'>选手</div>
+            <div className='th-car-name'>车型</div>
             <div>圈速</div>
           </div>
           { !rankList.length && !loading && <EmptyContent text='暂无数据哦~' />}
@@ -158,8 +166,11 @@ export default function Index() {
                 <Image className='item-avatar' src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                 <div className='item-name'>
                   <div>{record.timer_num}</div>
-                  <div>{record.nickName ? `${record.nickName}` : ''}</div>
+                  <div className='item-nick-name'>{record.nickName ? `${(record.nickName).repeat(3)}` : ''}</div>
                 </div>
+              </div>
+              <div className='item-car-name'>
+                {record.carName}
               </div>
               <div className='item-score'>
                 {record.bestScore}

@@ -12,7 +12,7 @@
         {
           "name": "绑定计时器",
           "pathName": "pages/bindWXTimer/index",
-          "query": "timer=GTMAXT 01号",
+          "query": "timer=25号",
           "launchMode": "default",
           "scene": null
         },

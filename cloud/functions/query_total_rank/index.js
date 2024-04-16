@@ -51,7 +51,7 @@ exports.main = async (event, context) => {
         openId: item._id,
         single_score: item.min_single_score,
         nick_name: record.data[0].nickName,
-        car_name: record.data[0].car_name,
+        carName: record.data[0].carName,
         avatar: avatarUrl,
         gender: record.data[0].gender,
         lap_create_time: record.data[0].lap_create_time,

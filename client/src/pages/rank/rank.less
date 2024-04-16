@@ -13,6 +13,9 @@ Page { background-color: #1f232d; }
         color: white;
         font-size: 22px;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         .top-avatar {
             border: 1px solid #252525;
             background: #252525;
@@ -61,10 +64,17 @@ Page { background-color: #1f232d; }
         border-style: dashed;
         background: #181818;
         .rank-no {
-            width: 100px;
+            width: 60px;
+        }
+        .rank-user {
+            margin-left: -30px;
+        }
+        .rank-car-name {
+            width: 70px;
+            margin-right: -70px;
         }
         .rank-score{
-            width: 90px;
+            width: 80px;
         }
     }
     .rank-item{
@@ -79,7 +89,8 @@ Page { background-color: #1f232d; }
         color: #A4A4A4;
         align-items: center;
         .noth-cell {
-            width: 100px;
+            width: 30px;
+            margin-left: -10px;
             .noth {
                 margin-left: 4px;
                 &.th-1 {
@@ -121,13 +132,9 @@ Page { background-color: #1f232d; }
             .item-name {
                 width: 110px;
                 color: rgba(255, 255, 255, 0.739);
-                .item-nick-name{
-                    flex-direction: column;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    max-width: 100%;
-                }
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
         }
     }

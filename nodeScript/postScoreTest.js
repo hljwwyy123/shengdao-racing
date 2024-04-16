@@ -41,7 +41,7 @@ function sendHttpRequest(data) {
         "car_name":"25号",
         "dateTime":1712136373670,
         "lap_create_time": currentTime,
-        "single_score": 86890,
+        "single_score": 86790,
       },
       {
         "car_name":"24号",
