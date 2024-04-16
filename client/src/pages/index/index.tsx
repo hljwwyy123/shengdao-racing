@@ -107,7 +107,7 @@ export default function Index() {
                   <div className='item-name'>
                     <div>{record.timer_num}</div>
                     <div className='item-name-extra'>
-                      <div className='item-nick-name'>{record.nickName ? `${(record.nickName).repeat(4)}` : ''}</div>
+                      <div className='item-nick-name'>{record.nickName ? `${record.nickName}` : ''}</div>
                     </div>
                   </div>
                   
@@ -166,7 +166,7 @@ export default function Index() {
                 <Image className='item-avatar' src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                 <div className='item-name'>
                   <div>{record.timer_num}</div>
-                  <div className='item-nick-name'>{record.nickName ? `${(record.nickName).repeat(3)}` : ''}</div>
+                  <div className='item-nick-name'>{record.nickName ? `${(record.nickName)}` : ''}</div>
                 </div>
               </div>
               <div className='item-car-name'>

@@ -41,13 +41,13 @@ function sendHttpRequest(data) {
         "car_name":"25号",
         "dateTime":1712136373670,
         "lap_create_time": currentTime,
-        "single_score": 86790,
+        "single_score": 86990,
       },
       {
         "car_name":"24号",
         "dateTime":1712136373670,
         "lap_create_time": currentTime,
-        "single_score": 86900,
+        "single_score": 86910,
       },
     ]);
     console.log('上报成功：',res)
