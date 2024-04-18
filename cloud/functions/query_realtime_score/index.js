@@ -23,9 +23,12 @@ exports.main = async (event, context) => {
             $regex: getTodayDateRegex()
         }
       })
+      .limit(500)
       .get();
+    
     let temp = {};
-    const recordList = result.data;
+    let recordList = result.data;
+    recordList = recordList.filter((e) => e.single_score > 70000 )
     for (let i = 0; i < recordList.length; i++) {
         temp = recordList[i];
         if (temp.avatar) {
