@@ -22,6 +22,7 @@ exports.main = async (event, context) => {
       .aggregate()
       .match({
         openId: _.exists(true),
+        single_score: _.gt(70000)
       })
       .group({
         _id: '$openId',
