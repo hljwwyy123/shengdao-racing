@@ -24,10 +24,12 @@ exports.main = async (event, context) => {
         openId: _.exists(true),
         single_score: _.gt(70000)
       })
+      .sort({'single_score': -1})
       .group({
         _id: '$openId',
         min_single_score: {"$min": "$single_score"}
       })
+      .limit(50)
       .end();
     // 查询对应的记录
     const data = await Promise.all(result.data.map(async item => {
@@ -38,6 +40,7 @@ exports.main = async (event, context) => {
         })
         .limit(1) // 只查询一条记录
         .get();
+
       let avatarUrl = "";
       if (record.data[0].avatar) {
         const result = await cloud.getTempFileURL({
@@ -59,5 +62,7 @@ exports.main = async (event, context) => {
       };
     }));
 
+    data.sort((a, b) => a.single_score - b.single_score )
+    
     return data
 }
