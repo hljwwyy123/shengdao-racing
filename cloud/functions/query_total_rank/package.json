@@ -1,16 +1,16 @@
 {
-    "name": "query_total_rank",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "@cloudbase/node-sdk": "^2.11.0",
-      "wx-server-sdk": "latest"
-    }
-  }
-  
+  "name": "query_total_rank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cloudbase/node-sdk": "^2.11.0",
+    "wx-server-sdk": "latest"
+  },
+  "repository": "https://github.com/hljwwyy123/shengdao-racing.git"
+}

@@ -4,11 +4,18 @@
   "setting": {
     "compileHotReLoad": true,
     "autoAudits": false,
-    "urlCheck": false
+    "urlCheck": true
   },
   "condition": {
     "miniprogram": {
       "list": [
+        {
+          "name": "文章介绍CMS",
+          "pathName": "pages/track/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
         {
           "name": "绑定计时器",
           "pathName": "pages/bindWXTimer/index",
