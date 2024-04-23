@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "赛场介绍",
+          "pathName": "pages/track/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "文章介绍CMS",
           "pathName": "pages/track/index",
           "query": "",
