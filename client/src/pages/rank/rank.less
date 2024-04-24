@@ -3,10 +3,12 @@ Page { background-color: #1f232d; }
 .rank-top-container {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 460px;
+    margin-top: 40px;
     .rank-bottom-bg{
         position: absolute;
-        bottom: 0;
+        bottom: -20px;
+        z-index: 1;
     }
     .top-rank-user-info{
         position: absolute;
@@ -16,39 +18,66 @@ Page { background-color: #1f232d; }
         display: flex;
         flex-direction: column;
         align-items: center;
+        z-index: 2;
         .top-avatar {
+            position: relative;
             border: 1px solid #252525;
             background: #252525;
-            box-shadow: 0 0 8px white;
+            // box-shadow: 0 0 8px white;
             margin-bottom: 8px;
+            z-index: 2;
+        }
+        .no-icon{
+            position: absolute;
+            width: 83rpx;
+            height: 48rpx;
+            top: -42px;
+            background-size: 100% 100% !important;
+            z-index: 1;
+            &.no-1 {
+                background: url('../../assets//no-1.png') no-repeat;
+                // background-size: 44rpx 52rpx
+            }
+            &.no-2 {
+                left: 14px;
+                background: url('../../assets//no-2.png') no-repeat;
+                // background-size: 44rpx 52rpx
+            }
+            &.no-3 {
+                left: 14px;
+                top: -40px;
+                background: url('../../assets//no-3.png') no-repeat;
+                // background-size: 44rpx 52rpx
+            }
         }
         &.rank-1 {
             left: 50%;
             transform: translateX(-50%);
             top: -4px;
             .top-avatar {
-                box-shadow: 0 0 8px gold;
+                border: 6px solid gold;
+                // box-shadow: 0 0 8px gold;
             }
         }
         &.rank-2 {
             left: 90px;
             top: 72px;
             .top-avatar {
-                box-shadow: 0 0 8px silver;
+                border: 6px solid silver;
             }
         }
         &.rank-3 {
             right: 90px;
             top: 80px;
             .top-avatar {
-                box-shadow: 0 0 8px #b87333;
+                border: 6px solid #b87333
             }
         }
     
     }
 }
 .table-container {
-    margin-top: 20px;
+    margin-top: 30px;
     color: white;
     font-size: 22px;
     .table-th {

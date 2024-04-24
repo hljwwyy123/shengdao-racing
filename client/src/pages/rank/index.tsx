@@ -11,6 +11,7 @@ import { DEFAULT_AVATAR } from '../../constant'
 import './rank.less'
 
 const TAB_LIST = ['巅峰榜'];
+const NO_ICON = ['../../../../assets/no-1.png','../../../../assets/no-2.png','../../../../assets/no-3.png']
 
 export default function TotalRank() {
   const [rankList, setRankList] = useState<any>([]);
@@ -63,11 +64,11 @@ export default function TotalRank() {
       </div>
       <div className='table-container'>
         <div className='table-th'>
-          <div className='th-no'>排名</div>
-          <div className='th-user'>选手</div>
-          <div className='th-car'>车型</div>
-          <div className='th-score'>圈速</div>
-          <div className='th-gmt'>产生时间</div>
+          <div className='th-no'>Pos</div>
+          <div className='th-user'>Driver</div>
+          <div className='th-car'>Model</div>
+          <div className='th-score'>Tm</div>
+          <div className='th-gmt'>Lap Time</div>
         </div>
         {
             rankList.map((record, no) => <div className='table-row'>
@@ -84,7 +85,7 @@ export default function TotalRank() {
                 </div>
               </div>
               <div className='car-cell'>
-                {record.carName}
+                {record.carName || '-'}
               </div>
               <div className='score-cell'>
                 {record.lap_time}
@@ -103,6 +104,7 @@ function TopRankUserInfo (props: any) {
   const { rankInfo, rank} = props;
   return <div className={`top-rank-user-info rank-${rank}`}>
     <Image lazyLoad className='top-avatar' src={rankInfo?.avatar} width={50} height={50} radius={"50%"}/>
+    <span className={`no-icon no-${rank}`} />
     <div className='nick-name'>{rankInfo.nick_name}</div>
     <div className='best-score'>{rankInfo.lap_time}</div>
   </div>
