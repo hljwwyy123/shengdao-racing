@@ -22,11 +22,13 @@ export default function ActivityIntro() {
   
 
   const getData = async () => {
+    Taro.showLoading()
     const { data } = await Taro.request({
       url: REQUEST_URL,
       method: 'GET'
     });
     setAtricle(data.data[0].activity)
+    Taro.hideLoading()
   }
 
   return <div className="activity-intro-wrapper">

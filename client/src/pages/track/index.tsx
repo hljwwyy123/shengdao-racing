@@ -21,12 +21,14 @@ export default function TrackIntro() {
   });
 
   const getData = async () => {
+    Taro.showLoading()
     const { data } = await Taro.request({
       url: REQUEST_URL,
       method: 'GET'
     });
     let dom = data.data[0].desc;
     setAtricle(dom)
+    Taro.hideLoading()
   }
 
   return <div className="track-intro-wrapper">

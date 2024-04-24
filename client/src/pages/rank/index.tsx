@@ -14,6 +14,7 @@ const TAB_LIST = ['巅峰榜'];
 
 export default function TotalRank() {
   const [rankList, setRankList] = useState<any>([]);
+  const [topRankList, setTopRankList] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<number>(0)
 
@@ -23,8 +24,8 @@ export default function TotalRank() {
 
   useShareAppMessage(() => {
     return {
-      title: '胜道巅峰榜', // 分享标题
-      path: '/pages/rank/index', // 分享路径，通常为当前页面路径
+      title: '胜道巅峰榜',
+      path: '/pages/rank/index',
     };
   });
 
@@ -40,6 +41,7 @@ export default function TotalRank() {
         lap_time: formatMilliseconds(record.single_score)
       }
     });
+    setTopRankList(rankList.splice(0, 3))
     console.log({rankList})
     setRankList(rankList)
     Taro.hideLoading()
@@ -54,38 +56,41 @@ export default function TotalRank() {
     <View className='total-rank-container'>
       <TabBar tabList={TAB_LIST} onTabChange={(e) => setActiveTab(e)}/>
       <div className='rank-top-container'>
-        { !!rankList.length && <TopRankUserInfo rankInfo={rankList[0]} rank={1} /> }
-        { rankList.length > 1 && <TopRankUserInfo rankInfo={rankList[1]} rank={2} /> }
-        { rankList.length > 2 && <TopRankUserInfo rankInfo={rankList[2]} rank={3} /> }
+        { !!topRankList.length && <TopRankUserInfo rankInfo={topRankList[0]} rank={1} /> }
+        { topRankList.length > 1 && <TopRankUserInfo rankInfo={topRankList[1]} rank={2} /> }
+        { topRankList.length > 2 && <TopRankUserInfo rankInfo={topRankList[2]} rank={3} /> }
         <Image className='rank-bottom-bg' src={RankBGImage}  width={'100%'} height={170}  />
       </div>
-      <div className='rank-list'>
-        <div className='rank-th'>
-          <div className='rank-no'>排名</div>
-          <div className='rank-user'>选手</div>
-          <div className='rank-car-name'>车型</div>
-          <div className='rank-score'>圈速</div>
+      <div className='table-container'>
+        <div className='table-th'>
+          <div className='th-no'>排名</div>
+          <div className='th-user'>选手</div>
+          <div className='th-car'>车型</div>
+          <div className='th-score'>圈速</div>
+          <div className='th-gmt'>产生时间</div>
         </div>
         {
-            rankList.map((record, no) => <div className='rank-item'>
+            rankList.map((record, no) => <div className='table-row'>
               <div className='noth-cell'>
-                <div className={`noth ${no < 3 ? `th-${no+1}` : ''}`}>
-                  {
-                    no >= 3 && <span>{no + 1}</span>
-                  }
+                <div className={`noth`}>
+                  <span>{no + 4}</span>
                 </div>
               </div>
-              <div className='rank-item-title'>
+              <div className='user-cell'>
                 <Image className='item-avatar' src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                 <div className='item-name'>
                     {record.nick_name ? `${record.nick_name}` : ''}
+                    {record.nick_name ? `${record.nick_name}` : ''}
                 </div>
               </div>
-              <div className='item-car-name'>
+              <div className='car-cell'>
                 {record.carName}
               </div>
-              <div className='item-score'>
+              <div className='score-cell'>
                 {record.lap_time}
+              </div>
+              <div className='gmt-cell'>
+                {record.lap_create_time}
               </div>
             </div>)
           }
