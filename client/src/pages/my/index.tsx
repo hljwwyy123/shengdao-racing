@@ -60,7 +60,10 @@ export default function Mine() {
           <span style={{ marginLeft: '5px' }}>关于赛场</span>
         </div>}
       />
-      <Cell title={<div style={{ display: 'inline-flex', alignItems: 'center' }}>
+      <Cell 
+        extra={<ArrowRight />} 
+        onClick={() => Taro.navigateTo({url: '/pages/activity/index'})}
+        title={<div style={{ display: 'inline-flex', alignItems: 'center' }}>
           <Notice />
           <span style={{ marginLeft: '5px' }}>活动中心</span>
         </div>}

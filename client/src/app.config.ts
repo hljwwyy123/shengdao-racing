@@ -6,7 +6,8 @@ export default {
     'pages/scanQRCode/index',
     'pages/bindWXTimer/index',
     'pages/history/index',
-    'pages/track/index'
+    'pages/track/index',
+    'pages/activity/index'
   ],
   tabBar: {
     // custom: true,
