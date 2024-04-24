@@ -23,23 +23,23 @@ exports.main = async (event, context) => {
             $regex: getTodayDateRegex()
         }
       })
-      .limit(500)
+      .limit(400)
       .get();
     
     let temp = {};
     let recordList = result.data;
     recordList = recordList.filter((e) => e.single_score > 70000 )
-    for (let i = 0; i < recordList.length; i++) {
-        temp = recordList[i];
-        if (temp.avatar) {
-            const result = await cloud.getTempFileURL({
-                fileList: [temp.avatar]
-            });
-            if (result.fileList && result.fileList.length) {
-                temp.avatar = result.fileList[0].tempFileURL;
-            }
-        }
-    }
+    // for (let i = 0; i < recordList.length; i++) {
+    //     temp = recordList[i];
+    //     if (temp.avatar) {
+    //         const result = await cloud.getTempFileURL({
+    //             fileList: [temp.avatar]
+    //         });
+    //         if (result.fileList && result.fileList.length) {
+    //             temp.avatar = result.fileList[0].tempFileURL;
+    //         }
+    //     }
+    // }
     const rank = groupBy(recordList, 'timer_num');
     return rank
 }

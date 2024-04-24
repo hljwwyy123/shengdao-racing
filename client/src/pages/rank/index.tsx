@@ -81,7 +81,6 @@ export default function TotalRank() {
                 <Image className='item-avatar' src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                 <div className='item-name'>
                     {record.nick_name ? `${record.nick_name}` : ''}
-                    {record.nick_name ? `${record.nick_name}` : ''}
                 </div>
               </div>
               <div className='car-cell'>

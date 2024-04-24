@@ -2,7 +2,7 @@ Page { background-color: #1f232d; }
 .rank-th{
     color: rgb(180, 176, 176);
     display: flex;
-    font-size: 24px;
+    font-size: 22px;
     justify-content: space-between;
     padding: 24rpx 40rpx 24rpx;
     border-width: 0 0 1px 0;
@@ -10,7 +10,7 @@ Page { background-color: #1f232d; }
     border-style: dashed;
     background: #181818;
     .th-auto {
-        width: 34%;
+        width: 30%;
         margin-left: 30px;
     }
     .th-score {
@@ -23,12 +23,13 @@ Page { background-color: #1f232d; }
         width: 60px;
     }
     .rank-no-score{
-        width: 100px;
+        width: 60px;
         // margin-left: -90px;
     }
 }
 
 .rank-list-container {
+    font-size: 20px;
     .rank-item {
         // display: flex;
         // border-bottom: 1px solid #8d8a8a;
@@ -57,6 +58,7 @@ Page { background-color: #1f232d; }
         .rank-item-title {
             display: flex;
             align-items: center;
+            font-size: 11px;
             .item-avatar {
                 margin-right: 8px;
                 min-width: 30px;
@@ -83,7 +85,8 @@ Page { background-color: #1f232d; }
                 width: 100%;
                 justify-content: space-between;
                 .best-score{
-                    font-weight: 500;
+                    font-weight: 400;
+                    font-size: 12px;
                     color: white;
                 }
                 .car-name {
@@ -100,7 +103,7 @@ Page { background-color: #1f232d; }
                     font-size: 12px;
                     .nut-icon {
                         margin-left: 4px;
-                        color: rgba(255, 255, 255, 0.1)
+                        color: #A4A4A4;
                     }
                 }
             }
@@ -108,7 +111,7 @@ Page { background-color: #1f232d; }
     }
     
     .rank-item-record-list{
-        font-size: 24px;
+        font-size: 22px;
         color: rgb(193, 190, 190);
         .rank-item-detail-item, .detail-item-th{
             display: flex;
@@ -126,15 +129,20 @@ Page { background-color: #1f232d; }
             }
         }
         .rank-item-detail-item{
+            
             .detail-item-no{
                 font-style: italic;
             }
             .detail-item-score {
-                font-weight: 500;
+                font-weight: 400;
+                text-align: left;
                 margin-left: 110px;
+                width: 110px;
+
             }
             .detail-item-recordtime{
                 width: 100px;
+                color: #A4A4A4;
             }
             padding: 4px 0;
             border-bottom: 1px solid rgba(0,0,0,0.02)

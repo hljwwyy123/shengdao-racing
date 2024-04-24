@@ -32,20 +32,30 @@ export default function Index() {
   });
 
   const getRealTimeScore = async () => {
-    !initedFetch && Taro.showLoading()
-    setLoading(true)
-    const { result } = await Taro.cloud.callFunction({
-      name: 'query_realtime_score',
-    });
-    const listData = aggregateRealTimeData(result)
-    setRankList(listData)
-    const _rankList = cloneDeep(listData)
-    console.log({_rankList})
-    const noList = _rankList.sort((a, b) => a.single_score - b.single_score);
-    setRankNoList(noList)
-    setLoading(false)
-    !initedFetch && Taro.hideLoading()
-    initedFetch = true
+    try {
+      !initedFetch && Taro.showLoading()
+      setLoading(true)
+      const { result } = await Taro.cloud.callFunction({
+        name: 'query_realtime_score',
+      });
+      const listData = aggregateRealTimeData(result)
+      setRankList(listData)
+      const _rankList = cloneDeep(listData)
+      console.log({_rankList})
+      const noList = _rankList.sort((a, b) => a.single_score - b.single_score);
+      setRankNoList(noList)
+      setLoading(false)
+      !initedFetch && Taro.hideLoading()
+      initedFetch = true
+    } catch (error) {
+      console.log(error)
+      Taro.showModal({
+        content: JSON.stringify(error)
+      })
+    } finally {
+      Taro.hideLoading()
+      setLoading(false)
+    }
   }
   
   const onCollspanChange = (
@@ -91,10 +101,10 @@ export default function Index() {
           }}
         >
           <div className='rank-th'>
-            <div className='th-auto'>选手</div>
-            <div className='th-score'>圈速</div>
-            <div className='th-car-name'>车型</div>
-            <div>总圈数</div>
+            <div className='th-auto'>Diver</div>
+            <div className='th-score'>Best Tm</div>
+            <div className='th-car-name'>Model</div>
+            <div>Laps</div>
           </div>
           { !rankList.length && !loading && <EmptyContent text='暂无数据哦~' />}
           <Collapse activeName={activeCollspan} className='rank-list-container' onChange={onCollspanChange}>
@@ -125,9 +135,9 @@ export default function Index() {
               >
                   <div className='rank-item-record-list'>
                     <div className='detail-item-th'>
-                        <div >序号</div>
-                        <div className='detail-item-score'>成绩</div>
-                        <div className='detail-item-recordtime'>记录时间</div>
+                        <div >No</div>
+                        <div className='detail-item-score'>Tm</div>
+                        <div className='detail-item-recordtime'>Lap Time</div>
                     </div>
                     {
                       record.records.map((detailItem: SCORE_DETAIL_ITEM, index: number) => <div className='rank-item-detail-item'>
@@ -147,10 +157,10 @@ export default function Index() {
         activeTab == 1 && 
         <div className='rank-no-list-container'>
           <div className='rank-th'>
-            <div>排名</div>
-            <div className='rank-no-score'>选手</div>
-            <div className='th-car-name'>车型</div>
-            <div>圈速</div>
+            <div>Pos</div>
+            <div className='rank-no-score'>Diver</div>
+            <div className='th-car-name'>Model</div>
+            <div>Tm</div>
           </div>
           { !rankList.length && !loading && <EmptyContent text='暂无数据哦~' />}
           {
