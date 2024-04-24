@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Taro, { useShareAppMessage } from '@tarojs/taro'
-import { RichText } from "@tarojs/components";
+import RichText from "../../components/RichText";
 import "./activity.less"
 
 const REQUEST_URL = 'https://racing-7gxq1capbac7539a-1300165852.ap-shanghai.service.tcloudbase.com/article/v1.0/activity'
@@ -30,6 +30,6 @@ export default function ActivityIntro() {
   }
 
   return <div className="activity-intro-wrapper">
-    <RichText nodes={atricleDomString}/>
+    <RichText nodes={atricleDomString} />
   </div>
 }

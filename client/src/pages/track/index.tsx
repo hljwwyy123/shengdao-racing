@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Taro, { useShareAppMessage } from '@tarojs/taro'
-import { RichText } from "@tarojs/components";
+import RichText from "../../components/RichText";
 import "./article.less"
 
 const REQUEST_URL = 'https://racing-7gxq1capbac7539a-1300165852.ap-shanghai.service.tcloudbase.com/article/v1.0/trace_desc'
@@ -20,17 +20,16 @@ export default function TrackIntro() {
     };
   });
 
-  
-
   const getData = async () => {
     const { data } = await Taro.request({
       url: REQUEST_URL,
       method: 'GET'
     });
-    setAtricle(data.data[0].desc)
+    let dom = data.data[0].desc;
+    setAtricle(dom)
   }
 
   return <div className="track-intro-wrapper">
-    <RichText nodes={atricleDomString}/>
+    <RichText nodes={atricleDomString} />
   </div>
 }
