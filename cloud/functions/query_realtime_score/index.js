@@ -26,7 +26,6 @@ exports.main = async (event, context) => {
       .limit(400)
       .get();
     
-    let temp = {};
     let recordList = result.data;
     recordList = recordList.filter((e) => e.single_score > 70000 )
     // for (let i = 0; i < recordList.length; i++) {
