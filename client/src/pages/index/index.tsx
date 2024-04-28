@@ -61,9 +61,18 @@ export default function Index() {
   const onCollspanChange = (
     activeName: string | string[],
   ) => {
-    console.log('activeName -- ',[activeName[activeName.length - 1]] as string[])
-    setActiveCollspan([activeName[activeName.length - 1]] as string[])
-
+    console.log('activeName -- ',activeName, [activeName[activeName.length - 1]] as string[])
+    const timerNum = activeName[activeName.length - 1];
+    setActiveCollspan([timerNum] as string[])
+    if (activeName.length) {
+      const record = rankList.find((e: any) => e.timer_num == timerNum)
+      Taro.reportEvent('toggle_collapse', {
+        "timer_num": timerNum,
+        "nickname": record.nickName,
+        "total_lap": record.totalLap,
+        "best_score": record.bestScore
+      })
+    }
   }
 
   return (

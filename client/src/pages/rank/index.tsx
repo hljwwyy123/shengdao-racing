@@ -80,7 +80,7 @@ export default function TotalRank() {
               <div className='user-cell'>
                 <Image className='item-avatar' src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                 <div className='item-name'>
-                    {record.nick_name ? `${record.nick_name}` : ''}
+                    {record.nick_name ? `${record.nick_name}` : 'unknown'}
                 </div>
               </div>
               <div className='car-cell'>
@@ -106,5 +106,6 @@ function TopRankUserInfo (props: any) {
     <span className={`no-icon no-${rank}`} />
     <div className='nick-name'>{rankInfo.nick_name}</div>
     <div className='best-score'>{rankInfo.lap_time}</div>
+    <div className='best-score'>{rankInfo.carName}</div>
   </div>
 }

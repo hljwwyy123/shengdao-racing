@@ -44,7 +44,7 @@ exports.main = async (event, context) => {
 }
 // 获取当天日期的正则表达式
 function getTodayDateRegex() {
-    const today = new Date();
+    const today = new Date('2024-04-27');
     const year = today.getFullYear();
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
     const day = today.getDate().toString().padStart(2, '0');
