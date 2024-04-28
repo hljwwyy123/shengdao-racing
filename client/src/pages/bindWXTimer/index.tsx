@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import Taro, { Config, useRouter } from '@tarojs/taro'
+import Taro, { useRouter } from '@tarojs/taro'
 import { Button, Form, Picker, Image, Input, Divider } from "@nutui/nutui-react-taro"
 import { Edit } from "@nutui/icons-react-taro"
-import { DEFAULT_AVATAR, DEFAULT_GROUP, DISPLACEMENT } from '../../constant'
+import { DEFAULT_GROUP, DISPLACEMENT } from '../../constant'
 import { getOpenId } from "../../utils"
 import CustomNoticeBar from '../../components/NoticeBar'
 import "./bind.less"
@@ -57,8 +57,12 @@ export default function BindWXTimer() {
     }
   }
 
+  const validateAvatar = () => {
+      return !!avatarFileId
+  }
+
   const doBind = async (values) => {
-    setLoading(true)
+    setLoading(true);
     const bindRes = await Taro.cloud.callFunction({
       name: 'bind_wx',
       data: {
@@ -100,6 +104,9 @@ export default function BindWXTimer() {
         label="头像"
         name="avatar"
         className='avatar-form-item'
+        rules={[
+          {validator: validateAvatar, message: '请上传头像'}
+        ]}
       >
         <Button className='avatar-choose-btn' openType='chooseAvatar' onChooseAvatar={uploadAvatar}>
           <Image error="点击上传"  className='avatar' src={avatar} width={80} height={80} radius={"50%"} />
@@ -111,6 +118,9 @@ export default function BindWXTimer() {
         required
         label="昵称"
         name="nickName"
+        rules={[
+          { required: true, message: '请输入昵称' },
+        ]}
       >
         <Input
           className="nut-input-text"
@@ -123,11 +133,6 @@ export default function BindWXTimer() {
         name="timerCode"
         className='timer-form-item'
       >
-        {/* <Input
-          className="nut-input-text timer-code"
-          readOnly={true}
-          type="text"
-        /> */}
         <div className='timer-code-block'>{timerCode}</div>
       </Form.Item>
       <Divider />

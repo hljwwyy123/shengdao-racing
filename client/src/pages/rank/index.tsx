@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Taro, { useShareAppMessage } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Ad } from '@tarojs/components'
 import { Image } from "@nutui/nutui-react-taro"
 import RankBGImage from "./rank-bg.png"
 import EmptyContent from '../../components/EmptyContent'
