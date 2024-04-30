@@ -3,6 +3,7 @@ import Taro, { useShareAppMessage } from '@tarojs/taro'
 import { Collapse } from "@nutui/nutui-react-taro"
 import { ArrowRight, ArrowDown } from '@nutui/icons-react-taro'
 import EmptyContent from '../../components/EmptyContent'
+import SuiteAdBar from '../../components/SuiteAd'
 import "./history.less"
 
 export default function History() {
@@ -40,9 +41,9 @@ export default function History() {
     return <div>
         <div className='rank-list'>
             <div className='rank-th'>
-                <div className='rank-no'>日期</div>
-                <div className='rank-user'>圈速</div>
-                <div className='rank-score'>总圈数</div>
+                <div className='rank-no'>Date</div>
+                <div className='rank-user'>Tm</div>
+                <div className='rank-score'>Laps</div>
             </div>
             { !rankList.length && <EmptyContent text='暂无数据哦~' />}
             <Collapse activeName={activeCollspan} className='rank-list-container' onChange={onCollspanChange}>
@@ -64,9 +65,9 @@ export default function History() {
               >
                   <div className='rank-item-record-list'>
                     <div className='detail-item-th'>
-                        <div >序号</div>
-                        <div className='detail-item-score'>成绩</div>
-                        <div className='detail-item-recordtime'>记录时间</div>
+                        <div >No</div>
+                        <div className='detail-item-score'>Tm</div>
+                        <div className='detail-item-recordtime'>Lap Time</div>
                     </div>
                     {
                       record.list.map((detailItem: any, index: number) => <div className='rank-item-detail-item'>
@@ -80,6 +81,7 @@ export default function History() {
               )
             }
           </Collapse>
+          { !!rankList.length && <SuiteAdBar id={2} /> }
         </div>
     </div>
 }

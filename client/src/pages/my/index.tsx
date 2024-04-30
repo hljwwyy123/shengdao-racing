@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import Taro, { Config, requirePlugin } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { Image, Grid, Button, Cell } from "@nutui/nutui-react-taro"
-import { Comment, List, Flag, Notice, ArrowRight } from '@nutui/icons-react-taro'
+import { Grid, Cell } from "@nutui/nutui-react-taro"
+import { Comment, List, Flag, Coupon, Notice, ArrowRight } from '@nutui/icons-react-taro'
 import { formatMilliseconds, getOpenId } from '../../utils'
 const commentPlugin = Taro.requirePlugin("wxacommentplugin");
 import './my.less'
@@ -72,7 +72,7 @@ export default function Mine() {
         extra={<ArrowRight />} 
         onClick={() => Taro.navigateTo({url: '/pages/shop/index'})}
         title={<div style={{ display: 'inline-flex', alignItems: 'center' }}>
-          <Notice />
+          <Coupon />
           <span style={{ marginLeft: '5px' }}>装备推荐</span>
         </div>}
       />

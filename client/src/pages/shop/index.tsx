@@ -17,8 +17,9 @@ export default function ShopIntro() {
 
   useShareAppMessage(() => {
     return {
-      title: '装备介绍', // 分享标题
+      title: '工厂直销赛道装备', // 分享标题
       path: '/pages/shop/index', // 分享路径，通常为当前页面路径
+      imageUrl: 'https://img.alicdn.com/imgextra/i3/O1CN011uXlf21yf8y0WlbaF_!!6000000006605-0-tps-1116-1007.jpg'
     };
   });
 

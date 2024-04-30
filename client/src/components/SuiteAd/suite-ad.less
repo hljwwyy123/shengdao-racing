@@ -1,0 +1,59 @@
+.suite-ad{
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 20px 40px;
+  margin-top: 20px;
+  margin-bottom: 4px;
+  background: #181818;
+  justify-content: space-between;
+  color: white;
+  &::before {
+    content: '广告';
+    position: absolute;
+    width: 30px;
+    height: 14px;
+    line-height: 14px;
+    background-color: red;
+    top: 0;
+    left: 0;
+    font-size: 10px;
+    text-align: center;
+  }
+  .img-container {
+    display: flex;
+    margin-right: 20px;
+  }
+  image {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0 6px;
+  }
+  .ad-text{
+    color: rgb(185, 180, 180);
+    font-size: 22px;
+  }
+  .toggle-am-jump{
+    animation: show-ad 2s infinite;
+    position: relative;
+    &.ml10 {
+      left: -10px;
+    }
+  }
+}
+
+@keyframes show-ad {
+  0% {
+    opacity: 0.2;
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(100%) scale(1.2);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translateX(0%) scale(1);
+  }
+}

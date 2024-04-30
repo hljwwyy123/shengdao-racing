@@ -5,6 +5,7 @@ import { Image } from "@nutui/nutui-react-taro"
 import RankBGImage from "./rank-bg.png"
 import EmptyContent from '../../components/EmptyContent'
 import TabBar from "../../components/TabBar"
+import SuiteAdBar from '../../components/SuiteAd'
 import { formatMilliseconds } from '../../utils'
 import { DEFAULT_AVATAR } from '../../constant'
 
@@ -94,6 +95,7 @@ export default function TotalRank() {
               </div>
             </div>)
           }
+          <SuiteAdBar id={2} />
       </div>
     </View>
   )
