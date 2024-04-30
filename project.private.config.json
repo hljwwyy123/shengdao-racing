@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "商品推荐",
+          "pathName": "pages/shop/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "赛场介绍",
           "pathName": "pages/track/index",
           "query": "",

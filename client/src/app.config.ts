@@ -7,7 +7,8 @@ export default {
     'pages/bindWXTimer/index',
     'pages/history/index',
     'pages/track/index',
-    'pages/activity/index'
+    'pages/activity/index',
+    'pages/shop/index'
   ],
   tabBar: {
     // custom: true,
