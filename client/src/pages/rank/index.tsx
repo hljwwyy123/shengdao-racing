@@ -54,13 +54,19 @@ export default function TotalRank() {
     return <EmptyContent />
   }
 
+  const previewAvatar = (url: string) => {
+    Taro.previewImage({
+      urls: [url]
+    })
+  }
+
   return (
     <View className='total-rank-container'>
       <TabBar tabList={TAB_LIST} onTabChange={(e) => setActiveTab(e)}/>
       <div className='rank-top-container'>
-        { !!topRankList.length && <TopRankUserInfo rankInfo={topRankList[0]} rank={1} /> }
-        { topRankList.length > 1 && <TopRankUserInfo rankInfo={topRankList[1]} rank={2} /> }
-        { topRankList.length > 2 && <TopRankUserInfo rankInfo={topRankList[2]} rank={3} /> }
+        { !!topRankList.length && <TopRankUserInfo rankInfo={topRankList[0]} rank={1} onPreview={previewAvatar} /> }
+        { topRankList.length > 1 && <TopRankUserInfo rankInfo={topRankList[1]} rank={2} onPreview={previewAvatar} /> }
+        { topRankList.length > 2 && <TopRankUserInfo rankInfo={topRankList[2]} rank={3} onPreview={previewAvatar} /> }
         <Image className='rank-bottom-bg' src={RankBGImage}  width={'100%'} height={170}  />
       </div>
       <div className='table-container'>
@@ -79,7 +85,7 @@ export default function TotalRank() {
                 </div>
               </div>
               <div className='user-cell'>
-                <Image className='item-avatar' src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
+                <Image className='item-avatar' onClick={() => previewAvatar(record.avatar)} src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                 <div className='item-name'>
                     {record.nick_name ? `${record.nick_name}` : 'unknown'}
                 </div>
@@ -102,9 +108,9 @@ export default function TotalRank() {
 }
 
 function TopRankUserInfo (props: any) {
-  const { rankInfo, rank} = props;
+  const { rankInfo, rank, onPreview} = props;
   return <div className={`top-rank-user-info rank-${rank}`}>
-    <Image lazyLoad className='top-avatar' src={rankInfo?.avatar} width={50} height={50} radius={"50%"}/>
+    <Image lazyLoad onClick={() => onPreview(rankInfo?.avatar)} className='top-avatar' src={rankInfo?.avatar} width={50} height={50} radius={"50%"}/>
     <span className={`no-icon no-${rank}`} />
     <div className='nick-name'>{rankInfo.nick_name}</div>
     <div className='best-score'>{rankInfo.lap_time}</div>

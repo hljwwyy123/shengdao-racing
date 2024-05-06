@@ -76,6 +76,12 @@ export default function Index() {
     }
   }
 
+  const previewAvatar = (url: string) => {
+    Taro.previewImage({
+      urls: [url]
+    })
+  }
+
   return (
     <div className='index'>
       {/* <Button onClick={postdata} type='primary'>模拟本地node提交数据</Button> */}
@@ -123,7 +129,7 @@ export default function Index() {
                 name={record.timer_num}
                 className='rank-item'
                 title={<div className='rank-item-title'>
-                  <Image className='item-avatar' lazyLoad src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
+                  <Image className='item-avatar' onClick={() => previewAvatar(record.avatar)} lazyLoad src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
                   <div className='item-name'>
                     <div>{record.timer_num}</div>
                     <div className='item-name-extra'>

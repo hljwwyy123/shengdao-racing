@@ -70,14 +70,6 @@ export default function Mine() {
       />
       <Cell 
         extra={<ArrowRight />} 
-        onClick={() => Taro.navigateTo({url: '/pages/shop/index'})}
-        title={<div style={{ display: 'inline-flex', alignItems: 'center' }}>
-          <Coupon />
-          <span style={{ marginLeft: '5px' }}>装备推荐</span>
-        </div>}
-      />
-      <Cell 
-        extra={<ArrowRight />} 
         onClick={() => commentPlugin.openComment({})}
         title={<div style={{ display: 'inline-flex', alignItems: 'center' }}
         >
