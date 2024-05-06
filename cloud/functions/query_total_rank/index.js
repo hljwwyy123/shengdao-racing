@@ -29,7 +29,7 @@ exports.main = async (event, context) => {
         _id: '$openId',
         min_single_score: {"$min": "$single_score"}
       })
-      .limit(50)
+      .limit(100)
       .end();
     // 查询对应的记录
     const data = await Promise.all(result.data.map(async item => {
