@@ -8,7 +8,7 @@ import { REAL_SCORE_ITEM, SCORE_DETAIL_ITEM } from 'src/type/realTime'
 import TabBar from "../../components/TabBar"
 import EmptyContent from '../../components/EmptyContent'
 import cloneDeep from 'lodash.clonedeep'
-import SuiteAdBar from '../../components/SuiteAd'
+// import SuiteAdBar from '../../components/SuiteAd'
 import './index.less'
 
 let initedFetch = false;
@@ -167,7 +167,7 @@ export default function Index() {
               )
             }
           </Collapse>
-          { !!rankList.length && <SuiteAdBar id={1} />}
+          {/* { !!rankList.length && <SuiteAdBar id={1} />} */}
         </PullToRefresh>
       }
       {
