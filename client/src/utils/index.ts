@@ -4,14 +4,20 @@ import { REAL_SCORE_ITEM } from "../type/realTime";
 
 export async function getOpenId () {
     let _openId = Taro.getStorageSync("openId");
+    let _unionId = Taro.getStorageSync("unionId");
     if (!_openId) {
         const res: any = await Taro.cloud.callFunction({
         name: 'login'
         });
         _openId = res.result.openid
+        _unionId = res.result.unionid
         Taro.setStorageSync("openId", _openId)
+        Taro.setStorageSync("unionId", _unionId)
     }
-    return _openId
+    return {
+        openId: _openId,
+        unionId: _unionId
+    }
 }
 
 export function randomScore() {
