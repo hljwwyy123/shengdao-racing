@@ -23,6 +23,7 @@ export default function BindWXTimer() {
   const [showGroupPicker, setShowGroupPicker] = useState<boolean>(false);
   const [showDisplacementPicker, setShowDisplacementPicker] = useState<boolean>(false);
   const [openId, setOpenId] = useState<string>("");
+  const [unionId, setUnionId] = useState<string>("");
 
   const router = useRouter<any>();
 
@@ -35,8 +36,9 @@ export default function BindWXTimer() {
   }, []);
 
   const getUserOpenId = async () => {
-    const _openId = await getOpenId();
-    setOpenId(_openId)
+    const {openId, unionId} = await getOpenId();
+    setOpenId(openId)
+    setUnionId(unionId)
   }
 
   

@@ -12,10 +12,14 @@ export default function Mine() {
   const [bestScoreInfo, setBestScoreInfo] = useState<any>({});
   const [totalLapNum, setTotalLapNum] = useState<number>(0);
   const [openId, setOpenId] = useState<string>('')
+  const [unionId, setUnionId] = useState<string>('')
 
   useEffect(() => {
     getMyRank()
-    getOpenId().then(res => setOpenId(res))
+    getOpenId().then(res => {
+      setOpenId(res.openId)
+      setUnionId(res.unionId)
+    })
   }, []);
 
   const getMyRank = async () => {
