@@ -8,7 +8,8 @@ export default {
     'pages/history/index',
     'pages/track/index',
     'pages/activity/index',
-    'pages/shop/index'
+    'pages/shop/index',
+    'pages/test/index'
   ],
   tabBar: {
     // custom: true,

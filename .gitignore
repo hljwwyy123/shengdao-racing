@@ -2,7 +2,7 @@ dist/
 deploy_versions/
 .temp/
 .rn_temp/
-nodeScript/node_modules
+./nodeScript/*/node_modules
 cloud/functions/bind_wx/node_modules
 cloud/functions/post_fromlocal/node_modules
 cloud/functions/post_score_fromlocal/node_modules/
@@ -12,3 +12,4 @@ cloud/functions/*/node_modules/
 *package-lock.json
 .DS_Store
 .swc
+

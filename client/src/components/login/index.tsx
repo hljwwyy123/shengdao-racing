@@ -2,7 +2,7 @@ import { Component, PropsWithChildren } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Button } from '@tarojs/components'
 
-export default class Index extends Component<PropsWithChildren> {
+export default class Login extends Component<PropsWithChildren> {
   state = {
     context: {}
   }

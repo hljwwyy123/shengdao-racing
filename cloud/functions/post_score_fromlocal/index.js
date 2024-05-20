@@ -39,12 +39,13 @@ async function combineData(postData) {
             "timer_num": el.car_name,
         }
         if (bindRecord.data && bindRecord.data.length) {
-            const {avatar, nickName, openId, carName, displacement, group } = bindRecord.data[0]
+            const {avatar, nickName, openId, carName, displacement, group, unionId } = bindRecord.data[0]
             const record = {
                 ...originData,
                 "avatar": avatar,
                 "nickName": nickName,
                 "openId": openId,
+                "unionId": unionId,
                 "group": group,
                 "carName": carName,
                 "displacement": displacement

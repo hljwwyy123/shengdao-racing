@@ -23,6 +23,7 @@ export default function Index() {
 
   useEffect(() => {
     getRealTimeScore()
+    
   }, [])
 
   useShareAppMessage(() => {
@@ -34,6 +35,10 @@ export default function Index() {
 
   const getRealTimeScore = async () => {
     try {
+      const loginRes = await Taro.cloud.callFunction({
+        name: 'login'
+      });
+      console.log(loginRes)
       !initedFetch && Taro.showLoading()
       setLoading(true)
       const { result } = await Taro.cloud.callFunction({

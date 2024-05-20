@@ -8,8 +8,10 @@ export async function getOpenId () {
         const res: any = await Taro.cloud.callFunction({
         name: 'login'
         });
-        _openId = res.result.openid
-        Taro.setStorageSync("openId", _openId)
+        const {openid, unionid} = res.result
+        _openId = openid;
+        Taro.setStorageSync("openId", openid)
+        Taro.setStorageSync("unionId", unionid)
     }
     return _openId
 }

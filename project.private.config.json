@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "云函数测试",
+          "pathName": "pages/test/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "商品推荐",
           "pathName": "pages/shop/index",
           "query": "",
