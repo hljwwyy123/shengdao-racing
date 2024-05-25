@@ -1,0 +1,112 @@
+const tcb = require('@cloudbase/node-sdk')
+const cloud = require('wx-server-sdk')
+
+cloud.init({
+  env: 'racing-7gxq1capbac7539a'
+})
+
+const tcbapp = tcb.init({
+  env: 'racing-7gxq1capbac7539a',
+  region: "ap-shanghai",
+});
+
+const db = tcbapp.database();
+const _ = db.command;
+
+// 核心抽奖函数
+exports.main = async (event, context) => {
+  const { activityId } = event;
+  const wxContext = cloud.getWXContext()
+  // 获取当前时间
+  const now = new Date();
+
+  // 获取活动信息
+  const activity = await db.collection('lucky_activity_list').doc(activityId).get();
+  const activityInfo = activity.data[0];
+  if (now < new Date(activityInfo.beginTime) || now > new Date(activityInfo.endTime)) {
+    throw new Error('活动未开始或已结束');
+  }
+
+  // 获取奖品列表
+  const prizesResult = await db.collection('lucky_award_config')
+    .where({
+      activityId: activityId,
+      // totalNum: _.gt(0) // 只获取剩余数量大于已发放数量的奖品
+    })
+    .get();
+
+  let prizes = prizesResult.data;
+  prizes = prizes.filter(prize => prize.totalNum > prize.offerNum);
+
+  if (prizes.length === 0) {
+    throw new Error('奖品已全部抽完');
+  }
+
+  // 计算所有有效奖品的总概率
+  let totalProbability = 0;
+  for (const prize of prizes) {
+    totalProbability += prize.probability;
+  }
+  // 检查总概率是否为0，如果为0则返回未中奖
+  if (totalProbability === 0) {
+    return { message: '未中奖' };
+  }
+
+  const notWinProbability = 100 - totalProbability;
+  
+  if (notWinProbability > 0) {
+    totalProbability = notWinProbability + totalProbability
+  }
+  
+  
+  // 生成随机数用于抽奖
+  const random = Math.random() * totalProbability;
+  let cumulativeProbability = 0;
+  let selectedPrize = null;
+
+  // 遍历奖品列表，根据概率选择奖品
+  for (const prize of prizes) {
+    cumulativeProbability += prize.probability;
+    if (random <= cumulativeProbability) {
+      selectedPrize = prize;
+      break;
+    }
+  }
+
+  if (!selectedPrize) {
+    return { message: '未中奖' };
+  }
+
+  // 更新中奖信息
+  const transaction = await db.startTransaction();
+  try {
+    // 更新奖品表中的已发放数量
+    await transaction.collection('lucky_award_config').doc(selectedPrize._id).update({
+      offerNum: _.inc(1)
+    });
+    // 添加中奖记录
+    await transaction.collection('lucky_lottery_record').add({
+      unionId: wxContext.UNIONID || wxContext.FROM_UNIONID,
+      openId: wxContext.OPENID || wxContext.FROM_OPENID,
+      activityId: activityId,
+      activityName: activityInfo.activityName,
+      prizeId: selectedPrize._id,
+      prizeName: selectedPrize.prizeName,
+      prizeImage: selectedPrize.prizeImage,
+      createdAt: now.getTime()
+    });
+
+    await transaction.commit();
+    return {
+      message: '中奖',
+      prize: {
+        prizeName: selectedPrize.prizeName,
+        prizeImage: selectedPrize.prizeImage,
+        prizeId: selectedPrize._id
+      }
+    };
+  } catch (error) {
+    await transaction.rollback();
+    throw new Error('抽奖失败，请重试');
+  }
+}

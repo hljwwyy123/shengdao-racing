@@ -17,19 +17,13 @@ const _ = db.command;
 // 云函数入口函数
 exports.main = async (event, context) => {
   const { activityId } = event;
-  const result = await db.collection('lucky_award_config')
-    .where({activityId: activityId})
+  const wxContext = cloud.getWXContext()
+  const result = await db.collection('lucky_lottery_record')
+    .where({
+      unionId: wxContext.FROM_UNIONID || wxContext.UNIONID,
+      // activityId: activityId
+    })
     .get();
-  await Promise.all(result.data.map(async el => {
-    if (el.prizeImage) {
-      const tmp = await cloud.getTempFileURL({
-        fileList: [el.prizeImage]
-      });
-      if (tmp.fileList && tmp.fileList.length) {
-        el.prizeImage = tmp.fileList[0].tempFileURL;
-      }
-    }
-  }))
   
   return result
 }
