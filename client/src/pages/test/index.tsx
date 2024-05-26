@@ -70,6 +70,16 @@ export default function Test() {
         console.log(res.result)
     }
 
+    const drawRecord = async () => {
+        const res = await Taro.cloud.callFunction({
+            name: 'lucky_get_activity_lottery_record',
+            data: {
+                activityId: "318e0c7e664ca40f01510f0732d2f5e9",
+            }
+        });
+        console.log(res.result)
+    }
+
     return <View>
         <Button onClick={getActivityList} >获取活动列表</Button>
         <Button onClick={getActivityInfo} >获取活动详情</Button>
@@ -77,5 +87,6 @@ export default function Test() {
         <Button onClick={updateAwardConfig} >更新活动奖品配置</Button>
         <Button onClick={delerteAwardConfig} >删除活动奖品配置</Button>
         <Button onClick={draw} type='success' >抽奖</Button>
+        <Button onClick={drawRecord} type='success' >抽奖记录</Button>
     </View>
 }

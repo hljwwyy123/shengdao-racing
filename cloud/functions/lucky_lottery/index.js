@@ -23,8 +23,17 @@ exports.main = async (event, context) => {
   // 获取活动信息
   const activity = await db.collection('lucky_activity_list').doc(activityId).get();
   const activityInfo = activity.data[0];
-  if (now < new Date(activityInfo.beginTime) || now > new Date(activityInfo.endTime)) {
-    throw new Error('活动未开始或已结束');
+  if (now < new Date(activityInfo.beginTime)) {
+    return {
+      errorMsg: '活动未开始'
+    }
+  } 
+
+  if (now > new Date(activityInfo.endTime)) {
+    // throw new Error('活动未开始或已结束');
+    return {
+      errorMsg: '活动已结束'
+    }
   }
 
   // 获取奖品列表
@@ -39,7 +48,9 @@ exports.main = async (event, context) => {
   prizes = prizes.filter(prize => prize.totalNum > prize.offerNum);
 
   if (prizes.length === 0) {
-    throw new Error('奖品已全部抽完');
+    return {
+      errorMsg: '奖品已全部抽完'
+    }
   }
 
   // 计算所有有效奖品的总概率

@@ -23,8 +23,12 @@ exports.main = async (event, context) => {
     awardConfig: [],
   };
   if (id) {
-    return db.collection('lucky_activity_list').where({_id: id}).update(payload)
+    const res = db.collection('lucky_activity_list').where({_id: id}).update(payload)
+    if (res) {
+      return { id: id }
+    }
+    return { id: id }
   } else {
-    return  db.collection('lucky_activity_list').add(payload)
+    return db.collection('lucky_activity_list').add(payload)
   }
 }
