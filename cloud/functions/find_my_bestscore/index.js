@@ -1,6 +1,5 @@
 const tcb = require('@cloudbase/node-sdk')
 const cloud = require('wx-server-sdk')
-const moment = require('moment');
 
 const tcbapp = tcb.init({
     env: 'racing-7gxq1capbac7539a',
@@ -16,11 +15,18 @@ const _ = db.command;
 
 
 exports.main = async (event, context) => {
-    const wxContext = cloud.getWXContext()
+    const wxContext = cloud.getWXContext();
+    const conditions = []
+
+    if (wxContext.OPENID) {
+      conditions.push({ openId: wxContext.OPENID })
+    }
+
+    if (wxContext.UNIONID || wxContext.FROM_UNIONID) {
+      conditions.push({ unionId: wxContext.UNIONID || wxContext.FROM_UNIONID })
+    }
     const bestScore = await db.collection('racing-data')
-        .where({
-            openId: wxContext.OPENID // 使用传入的 openId 进行查询
-        })
+        .where(_.or(conditions))
         .orderBy('single_score', 'asc') // 按照 single_score 升序排序
         .get();
 

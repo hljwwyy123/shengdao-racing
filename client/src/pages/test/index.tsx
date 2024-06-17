@@ -43,7 +43,7 @@ export default function Test() {
             data: {
                 // activityId: "318e0c7e664ca40f01510f0732d2f5e9",
                 id: '318e0c7e665098a8017ff95463f822d1',
-                prizeInfo: {prizeName: '123qwe',prizeNum: 3}
+                prizeInfo: { prizeName: '123qwe', prizeNum: 3 }
             }
         });
         console.log(res.result)
@@ -80,6 +80,19 @@ export default function Test() {
         console.log(res.result)
     }
 
+    const submitApprove = async () => {
+        const payload = { 
+            "randomSeed": "01J01J", "score": 92562, "nickName": "Aiden", "scoreImage": "cloud://racing-7gxq1capbac7539a.7261-racing-7gxq1capbac7539a-1300165852/lucky/880c3388664ca3cc014f835d0d988dd7/undefined.jpg", "id": "880c3388664ca3cc014f835d0d988dd7", "avatar": "cloud://racing-7gxq1capbac7539a.7261-racing-7gxq1capbac7539a-1300165852/undefined/lucky/avatar.jpg" 
+        }
+        const createRes = await Taro.cloud.callFunction({
+            name: 'lucky_approve_submit',
+            data: {
+                payload,
+                activityId: "880c3388664ca3cc014f835d0d988dd7"
+            }
+        });
+    }
+
     return <View>
         <Button onClick={getActivityList} >获取活动列表</Button>
         <Button onClick={getActivityInfo} >获取活动详情</Button>
@@ -88,5 +101,6 @@ export default function Test() {
         <Button onClick={delerteAwardConfig} >删除活动奖品配置</Button>
         <Button onClick={draw} type='success' >抽奖</Button>
         <Button onClick={drawRecord} type='success' >抽奖记录</Button>
+        <Button onClick={submitApprove} type='success'>报名抽奖</Button>
     </View>
 }
