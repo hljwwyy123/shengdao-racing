@@ -17,19 +17,21 @@ const _ = db.command;
 exports.main = async (event, context) => {
   const { activityId } = event;
   const wxContext = cloud.getWXContext()
+  const unionId = wxContext.FROM_UNIONID || wxContext.UNIONID;
+  const openId = wxContext.FROM_OPENID || wxContext.OPENID;
   // 获取当前时间
-  const now = new Date();
+  const nowTime = new Date().getTime();
 
   // 获取活动信息
   const activity = await db.collection('lucky_activity_list').doc(activityId).get();
   const activityInfo = activity.data[0];
-  if (now < new Date(activityInfo.beginTime)) {
+  if (nowTime < new Date(activityInfo.beginTime)) {
     return {
       errorMsg: '活动未开始'
     }
   } 
 
-  if (now > new Date(activityInfo.endTime)) {
+  if (nowTime > new Date(activityInfo.endTime)) {
     // throw new Error('活动未开始或已结束');
     return {
       errorMsg: '活动已结束'
@@ -83,13 +85,28 @@ exports.main = async (event, context) => {
       break;
     }
   }
+  // 获取报名信息里的昵称、头像
+  const joinRes = await db.collection('lucky_approve_list')
+    .where({
+      unionId: unionId,
+      activityId: activityId
+    })
+    .get();
+  const joinInfo = joinRes.data[0];
+  const transaction = await db.startTransaction();
+  await db.collection('lucky_approve_list')
+    .where({
+      unionId: unionId,
+      activityId: activityId
+    })
+    .update({
+      times: _.inc(-1) // 中不中奖都要扣次数
+    })
 
   if (!selectedPrize) {
     return { message: '未中奖' };
   }
 
-  // 更新中奖信息
-  const transaction = await db.startTransaction();
   try {
     // 更新奖品表中的已发放数量
     await transaction.collection('lucky_award_config').doc(selectedPrize._id).update({
@@ -97,14 +114,16 @@ exports.main = async (event, context) => {
     });
     // 添加中奖记录
     await transaction.collection('lucky_lottery_record').add({
-      unionId: wxContext.UNIONID || wxContext.FROM_UNIONID,
-      openId: wxContext.OPENID || wxContext.FROM_OPENID,
+      unionId,
+      openId,
       activityId: activityId,
       activityName: activityInfo.activityName,
       prizeId: selectedPrize._id,
       prizeName: selectedPrize.prizeName,
-      prizeImage: selectedPrize.prizeImage,
-      createdAt: now.getTime()
+      prizeImage: selectedPrize?.prizeImage,
+      nickName: joinInfo.nickName,
+      avatar: joinInfo.avatar,
+      createdAt: nowTime
     });
 
     await transaction.commit();
@@ -118,6 +137,6 @@ exports.main = async (event, context) => {
     };
   } catch (error) {
     await transaction.rollback();
-    throw new Error('抽奖失败，请重试');
+    throw new Error('抽奖失败，请重试', error);
   }
 }

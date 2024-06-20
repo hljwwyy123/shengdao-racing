@@ -21,7 +21,27 @@ exports.main = async (event, context) => {
       // unionId: wxContext.FROM_UNIONID || wxContext.UNIONID,
       activityId: activityId
     })
+    .orderBy('score', 'asc') // 按照 single_score 升序排序
     .get();
+
+    await Promise.all(result.data.map(async el => {
+      if (el.avatar) {
+        const tmp = await cloud.getTempFileURL({
+          fileList: [el.avatar]
+        });
+        if (tmp.fileList && tmp.fileList.length) {
+          el.avatar = tmp.fileList[0].tempFileURL;
+        }
+      }
+      if (el.scoreImage) {
+        const tmp = await cloud.getTempFileURL({
+          fileList: [el.scoreImage]
+        });
+        if (tmp.fileList && tmp.fileList.length) {
+          el.scoreImage = tmp.fileList[0].tempFileURL;
+        }
+      }
+    }))
   
   return result
 }

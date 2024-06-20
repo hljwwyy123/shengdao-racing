@@ -4,7 +4,6 @@ import { View, Ad } from '@tarojs/components'
 import { Image } from "@nutui/nutui-react-taro"
 import RankBGImage from "./rank-bg.png"
 import EmptyContent from '../../components/EmptyContent'
-import Login from "../../components/login"
 import TabBar from "../../components/TabBar"
 // import SuiteAdBar from '../../components/SuiteAd'
 import { formatMilliseconds } from '../../utils'
@@ -63,7 +62,6 @@ export default function TotalRank() {
 
   return (
     <View className='total-rank-container'>
-      <Login />
       <TabBar tabList={TAB_LIST} onTabChange={(e) => setActiveTab(e)}/>
       <div className='rank-top-container'>
         { !!topRankList.length && <TopRankUserInfo rankInfo={topRankList[0]} rank={1} onPreview={previewAvatar} /> }

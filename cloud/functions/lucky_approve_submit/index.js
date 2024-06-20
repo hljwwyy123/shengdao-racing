@@ -34,7 +34,7 @@ exports.main = async (event, context) => {
   } else {
     const randomSeed = fromCode(payload.randomSeed)
     await db.collection('lucky_approve_list')
-      .add({activityId: activityId, ...payload, unionId: unionId,  randomSeed})
+      .add({activityId: activityId, ...payload, unionId: unionId, randomSeed})
   }
   return result
 }

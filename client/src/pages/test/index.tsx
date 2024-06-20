@@ -64,7 +64,7 @@ export default function Test() {
         const res = await Taro.cloud.callFunction({
             name: 'lucky_lottery',
             data: {
-                activityId: "318e0c7e664ca40f01510f0732d2f5e9",
+                activityId: "e2764d2d6673e0ad033d85c81dc435a7",
             }
         });
         console.log(res.result)
@@ -93,6 +93,17 @@ export default function Test() {
         });
     }
 
+    const updateApproveStatus = async () => {
+        const createRes = await Taro.cloud.callFunction({
+            name: 'lucky_update_approve_status',
+            data: {
+                flag: false,
+                activityId: "880c3388664ca3cc014f835d0d988dd7"
+            }
+        });
+        console.log(createRes)
+    }
+
     return <View>
         <Button onClick={getActivityList} >获取活动列表</Button>
         <Button onClick={getActivityInfo} >获取活动详情</Button>
@@ -102,5 +113,6 @@ export default function Test() {
         <Button onClick={draw} type='success' >抽奖</Button>
         <Button onClick={drawRecord} type='success' >抽奖记录</Button>
         <Button onClick={submitApprove} type='success'>报名抽奖</Button>
+        <Button onClick={updateApproveStatus} type='success'>报名审核</Button>
     </View>
 }
