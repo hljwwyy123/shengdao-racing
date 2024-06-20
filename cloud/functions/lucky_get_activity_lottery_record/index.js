@@ -21,6 +21,16 @@ exports.main = async (event, context) => {
       activityId: activityId
     })
     .get();
-  
+  await Promise.all(result.data.map(async el => {
+      if (el.avatar) {
+        const tmp = await cloud.getTempFileURL({
+          fileList: [el.avatar]
+        });
+        if (tmp.fileList && tmp.fileList.length) {
+          el.avatar = tmp.fileList[0].tempFileURL;
+        }
+      }
+    })
+  )
   return result
 }

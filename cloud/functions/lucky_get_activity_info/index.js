@@ -16,12 +16,21 @@ const _ = db.command;
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  console.log(event)
   const data = await db.collection('lucky_activity_list')
     .where({
       _id: event.id
     })
     .get();
+  await Promise.all(data.data.map(async el => {
+    if (el.bannerImage) {
+      const tmp = await cloud.getTempFileURL({
+        fileList: [el.bannerImage]
+      });
+      if (tmp.fileList && tmp.fileList.length) {
+        el.bannerImage = tmp.fileList[0].tempFileURL;
+      }
+    }
+  }))
   
   return data
 }

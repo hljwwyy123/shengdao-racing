@@ -19,7 +19,7 @@ export default function Test() {
             name: 'lucky_get_activity_info',
             data: {
                 // id: "addca5a1664b4ec80144eb585ac2ee85"
-                id: "8212c3bc664b4e2d01403fb844ca9379"
+                id: "318e0c7e66743754033a011a3ad65786"
             }
         });
 

@@ -20,15 +20,22 @@ exports.main = async (event, context) => {
     .orderBy('createTime', 'desc')
     .get();
   const nowDate = new Date().getTime();
-  // activityStatus 0: 未开始 1：已开始 2：已结束
-  list.data.forEach(e => {
-    if (moment(e.beginTime).valueOf() > nowDate) {
-      e.activityStatus = 0;
-    } else if (moment(e.endTime).valueOf() < nowDate) {
-      e.activityStatus = 2;
-    } else if (moment(e.beginTime).valueOf() < nowDate && moment(e.endTime).valueOf() > nowDate) {
-      e.activityStatus = 1;
+  await Promise.all(list.data.map(async el => {
+    if (moment(el.beginTime).valueOf() > nowDate) {
+      el.activityStatus = 0;
+    } else if (moment(el.endTime).valueOf() < nowDate) {
+      el.activityStatus = 2;
+    } else if (moment(el.beginTime).valueOf() < nowDate && moment(el.endTime).valueOf() > nowDate) {
+      el.activityStatus = 1;
     }
-  })
+    if (el.bannerImage) {
+      const tmp = await cloud.getTempFileURL({
+        fileList: [el.bannerImage]
+      });
+      if (tmp.fileList && tmp.fileList.length) {
+        el.bannerImage = tmp.fileList[0].tempFileURL;
+      }
+    }
+  }))
   return list
 }

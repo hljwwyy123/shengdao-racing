@@ -20,10 +20,11 @@ exports.main = async (event, context) => {
     ...event, 
     unionId: wxContext.FROM_UNIONID, 
     createTime: moment(new Date().getTime()).format("YYYY-MM-DD HH:mm:ss"),
-    awardConfig: [],
   };
   if (id) {
-    const res = await db.collection('lucky_activity_list').where({_id: id}).update(payload)
+    const res = await db.collection('lucky_activity_list')
+      .where({_id: id})
+      .update({...event})
     if (res) {
       return { id: id }
     }
