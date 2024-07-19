@@ -88,9 +88,19 @@ export default function Test() {
             name: 'lucky_approve_submit',
             data: {
                 payload,
-                activityId: "880c3388664ca3cc014f835d0d988dd7"
+                activityId: "49be6ff566824e6500006aae5ab2f6be"
             }
         });
+    }
+
+    const getLotteryJoinInfo = async () => {
+        const createRes = await Taro.cloud.callFunction({
+            name: 'lucky_get_lottery_join_info',
+            data: {
+                activityId: "49be6ff566824e6500006aae5ab2f6be"
+            }
+        });
+        console.log(createRes)
     }
 
     const updateApproveStatus = async () => {
@@ -98,8 +108,15 @@ export default function Test() {
             name: 'lucky_update_approve_status',
             data: {
                 flag: false,
-                activityId: "880c3388664ca3cc014f835d0d988dd7"
+                activityId: "49be6ff566824e6500006aae5ab2f6be"
             }
+        });
+        console.log(createRes)
+    }
+
+    const findCurrentMonthBestScore = async () => {
+        const createRes = await Taro.cloud.callFunction({
+            name: 'find_my_bestscore_currentmonth',
         });
         console.log(createRes)
     }
@@ -114,5 +131,7 @@ export default function Test() {
         <Button onClick={drawRecord} type='success' >抽奖记录</Button>
         <Button onClick={submitApprove} type='success'>报名抽奖</Button>
         <Button onClick={updateApproveStatus} type='success'>报名审核</Button>
+        <Button onClick={findCurrentMonthBestScore} type='success'>查询当月最好成绩</Button>
+        <Button onClick={getLotteryJoinInfo} type='success'>查询报名信息</Button>
     </View>
 }
