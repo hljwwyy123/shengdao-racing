@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Taro, { useRouter } from '@tarojs/taro'
 import { Button, Form, Picker, Image, Input, Divider } from "@nutui/nutui-react-taro"
 import { Edit } from "@nutui/icons-react-taro"
-import { DEFAULT_GROUP, DISPLACEMENT } from '../../constant'
+import { DEFAULT_GROUP, DISPLACEMENT, VEHICLE_TYPE } from '../../constant'
 import { getOpenId } from "../../utils"
 import CustomNoticeBar from '../../components/NoticeBar'
 import "./bind.less"
@@ -20,8 +20,10 @@ export default function BindWXTimer() {
   const [avatarFileId, setAvatarFileId] = useState<string>("");
   const [groupDataSource] = useState<any[]>(DEFAULT_GROUP);
   const [displacementDataSource] = useState<any[]>(DISPLACEMENT);
+  const [vehicleTypeDataSource] = useState<any[]>(VEHICLE_TYPE);
   const [showGroupPicker, setShowGroupPicker] = useState<boolean>(false);
   const [showDisplacementPicker, setShowDisplacementPicker] = useState<boolean>(false);
+  const [showVehicleTypePicker, setShowVehicleTypePicker] = useState<boolean>(false);
   const [openId, setOpenId] = useState<string>("");
   const [unionId, setUnionId] = useState<string>("");
 
@@ -31,7 +33,10 @@ export default function BindWXTimer() {
     const { params } = router as { params: Params };
     const { timer = '' } = params;
     setTimerCode(timer)
-    form.setFieldsValue({ timerCode: timer })
+    form.setFieldsValue({ 
+      timerCode: timer,
+      vehicleType: 'Moto'
+    })
     getUserOpenId()
   }, []);
 
@@ -137,6 +142,19 @@ export default function BindWXTimer() {
       >
         <div className='timer-code-block'>{timerCode}</div>
       </Form.Item>
+      <Form.Item
+        label="车辆类型"
+        required
+        name="vehicleType"
+        onClick={() => setShowVehicleTypePicker(true)}
+      >
+        <Input
+          className="nut-input-text"
+          readOnly={true}
+          placeholder="请选择车辆类型"
+          type="text"
+        />
+      </Form.Item>
       <Divider />
       <Form.Item
         label="赛车型号"
@@ -171,6 +189,7 @@ export default function BindWXTimer() {
           type="text"
         />
       </Form.Item>
+      
     </Form>
     <Picker 
       options={groupDataSource}
@@ -189,6 +208,15 @@ export default function BindWXTimer() {
         form.setFieldsValue({ displacement: selectValue[0] })
       }}
       onCancel={() => setShowDisplacementPicker(false)}
+    />
+    <Picker 
+      options={vehicleTypeDataSource}
+      visible={showVehicleTypePicker}
+      onConfirm={(selectOptions, selectValue) => {
+        setShowVehicleTypePicker(false);
+        form.setFieldsValue({ vehicleType: selectValue[0] })
+      }}
+      onCancel={() => setShowVehicleTypePicker(false)}
     />
   </div>
 }

@@ -121,6 +121,14 @@ export default function Test() {
         console.log(createRes)
     }
 
+    const batchUpdateScore = async () => {
+        const res = await Taro.cloud.callFunction({
+            name: 'batch_update_type',
+            
+        });
+        console.log(res)
+    }
+
     return <View>
         <Button onClick={getActivityList} >获取活动列表</Button>
         <Button onClick={getActivityInfo} >获取活动详情</Button>
@@ -133,5 +141,6 @@ export default function Test() {
         <Button onClick={updateApproveStatus} type='success'>报名审核</Button>
         <Button onClick={findCurrentMonthBestScore} type='success'>查询当月最好成绩</Button>
         <Button onClick={getLotteryJoinInfo} type='success'>查询报名信息</Button>
+        <Button onClick={batchUpdateScore} type='warning'>批量更新成绩</Button>
     </View>
 }

@@ -10,6 +10,16 @@ export const DEFAULT_GROUP = [{
   value: 'C',
 }];
 
+export const VEHICLE_TYPE = [
+  {
+    text: 'Car',
+    value: 'Car',
+  },
+  {
+    text: 'Moto',
+    value: 'Moto',
+  },
+]
 export const DISPLACEMENT = [
   {
     text: '150',

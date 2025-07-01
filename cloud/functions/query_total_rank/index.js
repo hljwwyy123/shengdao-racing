@@ -17,26 +17,32 @@ const db = tcbapp.database({ throwOnNotFound: false })
 const _ = db.command;
 
 exports.main = async (event, context) => {
-    // 查询 racing-data 表中每个 openId 的最小 single_score，并且返回指定字段
+    const { vehicleType } = event;
+    console.log({vehicleType})
+    let matchCondition = {
+      openId: _.exists(true),
+      single_score: _.gt(70000),
+      vehicleType: _.eq(vehicleType)
+    };
+   
+    
     const result = await db.collection('racing-data')
       .aggregate()
-      .match({
-        openId: _.exists(true),
-        single_score: _.gt(70000)
-      })
+      .match(matchCondition)
       .sort({'single_score': -1})
       .group({
-        _id: '$openId',
+        _id: '$openId', 
         min_single_score: {"$min": "$single_score"}
       })
-      .limit(100)
+      .limit(500)
       .end();
     // 查询对应的记录
     const data = await Promise.all(result.data.map(async item => {
       const record = await db.collection('racing-data')
         .where({
           openId: db.command.eq(item._id), // 使用当前 _id 即 openId 进行查询
-          single_score: db.command.eq(item.min_single_score) // 最小 single_score 对应的记录
+          single_score: db.command.eq(item.min_single_score), // 最小 single_score 对应的记录
+          
         })
         .limit(1) // 只查询一条记录
         .get();

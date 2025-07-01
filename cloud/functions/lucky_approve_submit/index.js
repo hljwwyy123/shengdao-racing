@@ -30,7 +30,11 @@ exports.main = async (event, context) => {
         unionId: unionId,
         activityId: activityId
       })
-      .update({...payload});
+      .update({
+        ...payload,
+        isPass: _.remove()
+      });
+    
   } else {
     const randomSeed = fromCode(payload.randomSeed)
     await db.collection('lucky_approve_list')

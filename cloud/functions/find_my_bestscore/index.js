@@ -28,7 +28,9 @@ exports.main = async (event, context) => {
     const bestScore = await db.collection('racing-data')
         .where(_.or(conditions))
         .orderBy('single_score', 'asc') // 按照 single_score 升序排序
+        .limit(1000)
         .get();
+
 
     if (bestScore.data.length === 0) {
         // 如果未查询到记录，则返回空数据
