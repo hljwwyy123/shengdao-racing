@@ -44,6 +44,23 @@ function processScoreLogs() {
   });
 }
 
+// 函数：处理upload_log中所有记录的上传和删除
+function processMatchLogs() {
+ 
+  db.all("SELECT * FROM match_list", [], async (selectErr, rows) => {
+    if (selectErr) {
+      console.error('Error selecting from match_list', selectErr);
+      return;
+    }
+    
+    if (rows.length) {
+      // 为所有行发送HTTP请求，处理为Promise数组
+      await sendHttpRequest(rows);
+      console.log(`上传${rows.length}数据成功`)
+    }
+  });
+}
+
 // 函数：发送HTTP请求，并返回Promise
 function sendHttpRequest(data) {
   return axios.post(`https://racing-7gxq1capbac7539a-1300165852.ap-shanghai.app.tcloudbase.com/${CLOUD_FUNCTION_HTTPPATH}`, data, {
@@ -71,4 +88,5 @@ function sendHttpRequest(data) {
 
 
 // 开启轮询
-setInterval(processScoreLogs, 1000 * POLL_INTERVAL);
+setInterval(processScoreLogs, 1000 * POLL_INTERVAL); // 60秒
+setInterval(processMatchLogs, 1000 * POLL_INTERVAL * 5); //3分钟
