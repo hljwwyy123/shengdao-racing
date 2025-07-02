@@ -42,7 +42,7 @@ exports.main = async (event, context) => {
         .where({
           openId: db.command.eq(item._id), // 使用当前 _id 即 openId 进行查询
           single_score: db.command.eq(item.min_single_score), // 最小 single_score 对应的记录
-          
+          vehicleType: _.eq(vehicleType)
         })
         .limit(1) // 只查询一条记录
         .get();

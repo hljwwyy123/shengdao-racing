@@ -52,6 +52,8 @@ export default function TotalRank() {
       }
     });
 
+    console.log({formattedList})
+
     if (vehicleType === 'motorcycle') {
       setTopMotorRankList(formattedList.slice(0, 3));
       setMotorRankList(formattedList.slice(3));
@@ -82,7 +84,7 @@ export default function TotalRank() {
     <View className='total-rank-container'>
       <TabBar tabList={TAB_LIST} activeTab={activeTab} onTabChange={(e) => setActiveTab(e)}/>
       {
-        (!currentRankList.length && !loading) ? <EmptyContent />
+        ((!currentRankList.length && !currentTopRankList.length) && !loading) ? <EmptyContent />
         : 
         <div>
           <div className='rank-top-container'>
@@ -91,40 +93,43 @@ export default function TotalRank() {
             { currentTopRankList.length > 2 && <TopRankUserInfo rankInfo={currentTopRankList[2]} rank={3} onPreview={previewAvatar} /> }
             <Image className='rank-bottom-bg' src={RankBGImage}  width={'100%'} height={170}  />
           </div>
-          <div className='table-container'>
-            <div className='table-th'>
-              <div className='th-no'>Pos</div>
-              <div className='th-user'>Driver</div>
-              <div className='th-car'>Model</div>
-              <div className='th-score'>Tm</div>
-              <div className='th-gmt'>Lap Time</div>
+          {
+            currentRankList.length > 0 && 
+            <div className='table-container'>
+              <div className='table-th'>
+                <div className='th-no'>Pos</div>
+                <div className='th-user'>Driver</div>
+                <div className='th-car'>Model</div>
+                <div className='th-score'>Tm</div>
+                <div className='th-gmt'>Lap Time</div>
+              </div>
+              {
+                  currentRankList.map((record, no) => <div className='table-row'>
+                    <div className='noth-cell'>
+                      <div className={`noth`}>
+                        <span>{no + 4}</span>
+                      </div>
+                    </div>
+                    <div className='user-cell'>
+                      <Image className='item-avatar' onClick={() => previewAvatar(record.avatar)} src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
+                      <div className='item-name'>
+                          {record.nick_name ? `${record.nick_name}` : 'unknown'}
+                      </div>
+                    </div>
+                    <div className='car-cell'>
+                      {record.carName || '-'}
+                    </div>
+                    <div className='score-cell'>
+                      {record.lap_time}
+                    </div>
+                    <div className='gmt-cell'>
+                      {record.lap_create_time}
+                    </div>
+                  </div>)
+                }
+                {/* <SuiteAdBar id={2} /> */}
             </div>
-            {
-                currentRankList.map((record, no) => <div className='table-row'>
-                  <div className='noth-cell'>
-                    <div className={`noth`}>
-                      <span>{no + 4}</span>
-                    </div>
-                  </div>
-                  <div className='user-cell'>
-                    <Image className='item-avatar' onClick={() => previewAvatar(record.avatar)} src={record.avatar || DEFAULT_AVATAR} width={30} height={30} radius={"50%"} />
-                    <div className='item-name'>
-                        {record.nick_name ? `${record.nick_name}` : 'unknown'}
-                    </div>
-                  </div>
-                  <div className='car-cell'>
-                    {record.carName || '-'}
-                  </div>
-                  <div className='score-cell'>
-                    {record.lap_time}
-                  </div>
-                  <div className='gmt-cell'>
-                    {record.lap_create_time}
-                  </div>
-                </div>)
-              }
-              {/* <SuiteAdBar id={2} /> */}
-          </div>
+          }
         </div>
       
       }
