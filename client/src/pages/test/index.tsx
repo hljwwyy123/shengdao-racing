@@ -129,6 +129,14 @@ export default function Test() {
         console.log(res)
     }
 
+    const queryMatchList = async () => {
+        const res = await Taro.cloud.callFunction({
+            name: 'query_match_list',
+            
+        });
+        console.log(res)
+    }
+
     return <View>
         <Button onClick={getActivityList} >获取活动列表</Button>
         <Button onClick={getActivityInfo} >获取活动详情</Button>
@@ -142,5 +150,6 @@ export default function Test() {
         <Button onClick={findCurrentMonthBestScore} type='success'>查询当月最好成绩</Button>
         <Button onClick={getLotteryJoinInfo} type='success'>查询报名信息</Button>
         <Button onClick={batchUpdateScore} type='warning'>批量更新成绩</Button>
+        <Button onClick={queryMatchList} type='success'>查询比赛列表</Button>
     </View>
 }

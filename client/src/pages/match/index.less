@@ -1,0 +1,257 @@
+Page { background-color: #1f232d; }
+.rank-th{
+    color: rgb(180, 176, 176);
+    display: flex;
+    font-size: 22px;
+    justify-content: space-between;
+    padding: 24rpx 40rpx 24rpx;
+    border-width: 0 0 1px 0;
+    border-color: rgba(255, 255, 255, 0.1);
+    border-style: dashed;
+    background: #181818;
+    .th-auto {
+        width: 20%;
+        margin-left: 30px;
+    }
+    .th-time {
+        // margin-left: 34px;
+        width: 30%;
+        text-align: center;
+    }
+   
+    .th-group {
+        width: 420px;
+        text-align: center;
+    }
+}
+
+.rank-list-container {
+    font-size: 20px;
+    .rank-item {
+        // display: flex;
+        // border-bottom: 1px solid #8d8a8a;
+        margin: 2px 0;
+        background-color: #30333e;
+    }
+
+    .rank-th :first-child{
+        margin-left: 30px;
+    }
+    .rank-th {
+        
+        .th-score{
+            margin-left: 60px;
+        }
+    }
+    .nut-collapse-item-header {
+        position: sticky;
+        top: -1px;
+        align-items: center;
+        // background-color: #1f232d;
+        background: #181818;
+        .nut-collapse-item-icon-box {
+            display: none;
+        }
+        .rank-item-title {
+            display: flex;
+            align-items: center;
+            font-size: 11px;
+            width: 100%;
+            
+            .item-name {
+                width: 160px;
+                color: rgba(255, 255, 255, 0.739);
+                .item-nick-name{
+                    flex-direction: column;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    max-width: 100%;
+                }
+                .item-name-extra{
+                    display: flex;
+                }
+            }
+        }
+        .nut-collapse-item-extra{
+            padding: 0;
+            .extra-cell{
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                .match-type{
+                    font-weight: 400;
+                    font-size: 12px;
+                    color: white;
+                }
+                .match-time{
+                    width: 100px;
+                }
+                .total-lap{
+                    display: flex;
+                    align-items: center;
+                    font-size: 12px;
+                    .nut-icon {
+                        margin-left: 4px;
+                        color: #A4A4A4;
+                    }
+                }
+                .group-cell {
+                    width: 60px;
+                    text-align: center;
+                    color: #A4A4A4;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    
+    .rank-item-record-list{
+        font-size: 22px;
+        color: rgb(193, 190, 190);
+        .rank-item-detail-item, .detail-item-th{
+            display: flex;
+            justify-content: space-between;
+            view {
+                text-align: left;
+                // flex: 1;
+            }
+        }
+        
+        .detail-item-th{
+            color: rgb(180, 176, 176);
+            .detail-item-score {
+                margin-left:70px;
+            }
+        }
+        .rank-item-detail-item{
+            
+            .detail-item-no{
+                font-style: italic;
+            }
+            .detail-item-score {
+                font-weight: 400;
+                text-align: left;
+                margin-left: 110px;
+                width: 110px;
+
+            }
+            .detail-item-recordtime{
+                width: 100px;
+                color: #A4A4A4;
+            }
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.02)
+        }
+    }
+    .nut-collapse-item-content{
+        background-color: #333640f9;
+    }
+}
+
+.rank-no-list-container {
+    padding: var(--nutui-collapse-item-padding, 13px 26px);
+    
+    .rank-th {
+        text-align: left;
+        flex: 1;
+        background: #181818;
+        border-radius: 24px 24px 0 0;
+        padding: 24rpx 46rpx 24rpx 50rpx;
+    }
+    .rank-item{
+        display: flex;
+        justify-content: space-between;
+        // padding-left: 60px;
+        background: #181818;
+        padding: 40px 40px 40px 60px;
+        margin-bottom: 4px;
+        box-sizing: border-box;
+        font-size: 24px;
+        color: #A4A4A4;
+        align-items: center;
+        .noth-cell {
+            width: 60px;
+            .noth {
+                margin-left: 4px;
+                &.th-1 {
+                    margin-left: -6rpx;
+                    width: 44rpx;
+                    height: 52rpx;
+                    background: url('../../assets/rank-1.png') no-repeat;
+                    background-size: 44rpx 52rpx
+                    
+                }
+                &.th-2 {
+                    margin-left: -6rpx;
+                    width: 44rpx;
+                    height: 52rpx;
+                    background: url('../../assets/rank-2.png') no-repeat;
+                    background-size: 100% 100%;
+                    
+                }
+                &.th-3 {
+                    margin-left: -6rpx;
+                    width: 44rpx;
+                    height: 52rpx;
+                    background: url('../../assets/rank-3.png') no-repeat;
+                    background-size: 100% 100%;
+                    
+                }
+            }
+        }
+        .item-score {
+            font-weight: 500;
+        }
+        .item-car-name {
+            width: 110px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .rank-item-title {
+            display: flex;
+            align-items: center;
+            width: 50%;
+            margin-left: 0;
+            .item-avatar {
+                width: 60rpx;
+                height: 30px;
+                min-width: 60px;
+                margin-right: 10px;
+            }
+            .item-name {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                max-width: 100%;
+                color: rgba(255, 255, 255, 0.739);
+                .item-nick-name{
+                    flex-direction: column;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.index {
+  .filter-bar {
+    background: #1818187b;
+    padding: 24rpx 40rpx;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    .group-filter {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: rgb(180, 176, 176);
+      font-size: 24rpx;
+      span {
+        margin-right: 8rpx;
+            }
+        }
+    }
+}

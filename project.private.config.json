@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "比赛列表",
+          "pathName": "pages/match/index",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        },
+        {
           "name": "云函数测试",
           "pathName": "pages/test/index",
           "query": "",

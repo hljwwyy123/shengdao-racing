@@ -3,6 +3,7 @@ export default {
     'pages/rank/index',
     'pages/index/index',
     'pages/my/index',
+    'pages/match/index',
     'pages/scanQRCode/index',
     'pages/bindWXTimer/index',
     'pages/history/index',
@@ -20,6 +21,12 @@ export default {
       {
         pagePath: 'pages/index/index',
         text: '圈速数据',
+        iconPath: 'assets/images/rank.png',
+        selectedIconPath: 'assets/images/rank-active.png',
+      },
+      {
+        pagePath: 'pages/match/index',
+        text: '比赛',
         iconPath: 'assets/images/rank.png',
         selectedIconPath: 'assets/images/rank-active.png',
       },
