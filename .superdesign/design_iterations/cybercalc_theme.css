@@ -1,0 +1,27 @@
+:root {
+  --background: oklch(0.12 0.03 260);
+  --foreground: oklch(0.98 0.02 80);
+  --primary: oklch(0.85 0.18 170);
+  --primary-foreground: oklch(0.15 0.05 260);
+  --secondary: oklch(0.20 0.10 240);
+  --muted: oklch(0.08 0.02 260);
+  --accent: oklch(0.95 0.15 80);
+  --destructive: oklch(0.65 0.25 30);
+  --border: oklch(0.25 0.08 260);
+  --input: oklch(0.15 0.05 260);
+  --ring: oklch(0.95 0.15 80);
+  --font-sans: 'Oxanium', sans-serif;
+  --radius: 0.5rem;
+  --shadow-sm: 0 2px 8px -1px oklch(0.95 0.15 80 / 0.25);
+  --shadow-md: 0 4px 12px -2px oklch(0.95 0.15 80 / 0.3);
+  --shadow-lg: 0 8px 16px -4px oklch(0.95 0.15 80 / 0.35);
+}
+
+button {
+  box-shadow: var(--shadow-sm) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+button:active {
+  transform: scale(0.97) !important;
+}

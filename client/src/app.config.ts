@@ -27,8 +27,8 @@ export default {
       {
         pagePath: 'pages/match/index',
         text: '比赛',
-        iconPath: 'assets/images/rank.png',
-        selectedIconPath: 'assets/images/rank-active.png',
+        iconPath: 'assets/images/game.png',
+        selectedIconPath: 'assets/images/game_active.png',
       },
       {
         pagePath: 'pages/rank/index',

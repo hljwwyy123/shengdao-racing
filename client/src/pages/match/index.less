@@ -109,39 +109,93 @@ Page { background-color: #1f232d; }
     .rank-item-record-list{
         font-size: 22px;
         color: rgb(193, 190, 190);
-        .rank-item-detail-item, .detail-item-th{
+
+        // 统一表头和数据行的布局，保证对齐
+        .detail-item-th, .rank-item-detail-item {
             display: flex;
-            justify-content: space-between;
-            view {
-                text-align: left;
-                // flex: 1;
-            }
+            align-items: center;
+            // 这里不使用 justify-content: space-between，改为固定宽度对齐
         }
-        
-        .detail-item-th{
+
+        // 表头样式
+        .detail-item-th {
             color: rgb(180, 176, 176);
+            font-weight: 500;
+            .th-pos {
+                width: 100px;
+                min-width: 100px;
+                text-align: left;
+            }
+            .th-no {
+                width: 80px;
+                min-width: 80px;
+                text-align: left;
+            }
+            .th-driver {
+                width: 220px;
+                min-width: 220px;
+                text-align: left;
+            }
             .detail-item-score {
-                margin-left:70px;
+                width: 100px;
+                min-width: 100px;
+                text-align: left;
+            }
+            // 新增总用时列样式
+            .detail-item-total-time {
+                width: 130px;
+                min-width: 130px;
+                text-align: left;
+            }
+            .detail-item-recordtime {
+                width: 100px;
+                min-width: 100px;
+                text-align: left;
             }
         }
-        .rank-item-detail-item{
-            
+
+        // 数据行样式
+        .rank-item-detail-item {
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.02);
+
+            .item-pos {
+                width: 100px;
+                min-width: 100px;
+                text-align: left;
+            }
+            .item-timer-num {
+                width: 80px;
+                min-width: 80px;
+                text-align: left;
+            }
+            .item-nickname {
+                width: 220px;
+                min-width: 220px;
+                text-align: left;
+            }
+            .detail-item-score {
+                width: 100px;
+                min-width: 100px;
+                margin: 0 6px;
+                font-weight: 400;
+                text-align: left;
+            }
+            // 新增总用时列样式
+            .detail-item-total-time {
+                width: 130px;
+                min-width: 130px;
+                text-align: left;
+            }
+            .item-laps, .detail-item-recordtime {
+                width: 100px;
+                min-width: 100px;
+                color: #A4A4A4;
+                text-align: left;
+            }
             .detail-item-no{
                 font-style: italic;
             }
-            .detail-item-score {
-                font-weight: 400;
-                text-align: left;
-                margin-left: 110px;
-                width: 110px;
-
-            }
-            .detail-item-recordtime{
-                width: 100px;
-                color: #A4A4A4;
-            }
-            padding: 4px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.02)
         }
     }
     .nut-collapse-item-content{

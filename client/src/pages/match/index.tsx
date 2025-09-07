@@ -3,9 +3,12 @@ import Taro, { useShareAppMessage } from '@tarojs/taro'
 import { Collapse, Image, PullToRefresh } from "@nutui/nutui-react-taro"
 import { ArrowRight, ArrowDown } from '@nutui/icons-react-taro'
 import EmptyContent from '../../components/EmptyContent'
-import './index.less'
 import { View } from '@tarojs/components'
 import { formatMilliseconds } from '../../utils'
+import NO_1_IMAGE from "../../assets/game/no_1.png"
+import NO_2_IMAGE from "../../assets/game/no_2.png"
+import NO_3_IMAGE from "../../assets/game/no_3.png"
+import './index.less'
 
 /**
  * 比赛列表页面
@@ -18,8 +21,17 @@ export default function Index() {
   const [activeCollspan, setActiveCollspan] = useState<string[]>([]);
   // 当前展开比赛的圈速成绩
   const [scoreList, setScoreList] = useState<any[]>([]);
+  // 当前展开比赛的类型
+  const [activeMatchType, setActiveMatchType] = useState<string | undefined>(undefined);
   // 加载状态
   const [loading, setLoading] = useState(false);
+
+  // 奖牌图片Map
+  const rankImageMap: Record<number, string> = {
+    0: NO_1_IMAGE,
+    1: NO_2_IMAGE,
+    2: NO_3_IMAGE,
+  };
 
   useEffect(() => {
     getMatchList();
@@ -60,9 +72,11 @@ export default function Index() {
     setActiveCollspan([matchSeqStr]);
     const matchItem = matchList.find(item => item.match_seq === matchSeqStr);
     if (matchItem) {
+      setActiveMatchType(String(matchItem.match_type));
       await getScoreList(matchItem);
     } else {
       setScoreList([]);
+      setActiveMatchType(undefined);
     }
   };
 
@@ -107,24 +121,40 @@ export default function Index() {
     if (!scoreList.length) {
       return <div className="empty-score-list">暂无成绩</div>;
     }
+    // 判断当前展开比赛的类型
+    const isQualifying = activeMatchType === '2';
     return (
       <div className='rank-item-record-list'>
         <div className='detail-item-th'>
-          <div>Pos</div>
-          <div>No</div>
-          <div>Diver</div>
+          <div className='th-pos'>Pos</div>
+          <div className='th-no'>No</div>
+          <div className='th-driver'>Driver</div>
           <div className='detail-item-score'>Best Tm</div>
+          {isQualifying && <div className='detail-item-total-time'>Toal Tm</div>}
           <div className='detail-item-recordtime'>Laps</div>
         </div>
         {scoreList.map((item, idx) => (
           <div className='rank-item-detail-item' key={item.openId || idx}>
-            <div>{idx + 1}</div>
-            <div>{item.timer_num || '-'}</div>
-            <div>{item.nickName || '-'}</div>
+            <div className='item-pos'>
+              {rankImageMap[idx] ? (
+                <img
+                  src={rankImageMap[idx]}
+                  alt={`rank-${idx + 1}`}
+                  style={{ width: 22, height: 22, marginLeft: 6, verticalAlign: 'middle' }}
+                />
+              ) : idx + 1}
+            </div>
+            <div className='item-timer-num'>{item.timer_num || '-'}</div>
+            <div className='item-nickname'>{item.nickName || '-'}</div>
             <div className='detail-item-score'>
               {item.single_score ? formatMilliseconds(item.single_score) : (item.totalScore ? formatMilliseconds(item.totalScore) : '-')}
             </div>
-            <div>{item.totalLap || (item.allLaps ? item.allLaps.length : '-')}</div>
+            {isQualifying && (
+              <div className='detail-item-total-time'>
+                {item.totalScore ? formatMilliseconds(item.totalScore) : '-'}
+              </div>
+            )}
+            <div className='item-laps'>{item.totalLap || (item.allLaps ? item.allLaps.length : '-')}</div>
           </div>
         ))}
       </div>

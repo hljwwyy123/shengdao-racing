@@ -25,7 +25,7 @@ exports.main = async (event, context) => {
         .where({
             match_seq: _.eq(match_seq)
         })
-        .limit(400)
+        .limit(1000)
         .get();
 
     let recordList = result.data || [];
@@ -70,11 +70,12 @@ exports.main = async (event, context) => {
             const userRecords = grouped[openId];
             // 总成绩
             let totalScore = userRecords.reduce((sum, cur) => sum + (cur.single_score || 0), 0);
+            let best = userRecords.reduce((min, cur) => cur.single_score < min.single_score ? cur : min, userRecords[0]);
             // 取第一个圈速为代表
-            let rep = userRecords[0];
+            // let rep = userRecords[0];
             let totalLap = userRecords.length;
             rankList.push({
-                ...rep,
+                ...best,
                 totalLap,
                 totalScore,
                 allLaps: userRecords, // 可选：返回所有圈速
