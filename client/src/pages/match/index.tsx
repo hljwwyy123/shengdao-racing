@@ -39,7 +39,7 @@ export default function Index() {
 
   useShareAppMessage(() => {
     return {
-      title: '胜道巅峰榜',
+      title: '426巅峰榜',
       path: '/pages/match/index',
     };
   });

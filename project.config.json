@@ -2,7 +2,7 @@
   "miniprogramRoot": "client/dist/",
   "cloudfunctionRoot": "cloud/functions/",
   "projectname": "racing-score",
-  "description": "胜道博岳圈速排行榜",
+  "description": "426圈速排行榜",
   "appid": "wx98786041f7a0b60d",
   "setting": {
     "urlCheck": true,

@@ -40,7 +40,7 @@ async function combineData(postData) {
             "match_seq": el.match_seq
         }
         if (bindRecord.data && bindRecord.data.length) {
-            const {avatar, nickName, openId, carName, displacement, group, unionId } = bindRecord.data[0]
+            const {avatar, nickName, openId, carName, vehicleType, displacement, group, unionId } = bindRecord.data[0]
             const record = {
                 ...originData,
                 "avatar": avatar,
@@ -50,7 +50,7 @@ async function combineData(postData) {
                 "group": group,
                 "carName": carName,
                 "displacement": displacement,
-                
+                "vehicleType": vehicleType
             }
             payloadList.push(record)
         } else {

@@ -14,7 +14,7 @@ export default function ActivityIntro() {
 
   useShareAppMessage(() => {
     return {
-      title: '胜道赛道活动', // 分享标题
+      title: '426赛道活动', // 分享标题
       path: '/pages/activity/index', // 分享路径，通常为当前页面路径
     };
   });

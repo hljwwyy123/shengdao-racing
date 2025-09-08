@@ -33,7 +33,7 @@ export default function TotalRank() {
 
   useShareAppMessage(() => {
     return {
-      title: '胜道巅峰榜',
+      title: '426巅峰榜',
       path: '/pages/rank/index',
     };
   });

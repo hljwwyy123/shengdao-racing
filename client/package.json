@@ -2,7 +2,7 @@
   "name": "racing-score",
   "version": "1.0.0",
   "private": true,
-  "description": "胜道博岳圈速排行榜",
+  "description": "426圈速排行榜",
   "templateInfo": {
     "name": "wxcloud",
     "typescript": true,

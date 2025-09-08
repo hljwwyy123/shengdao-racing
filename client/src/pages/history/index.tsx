@@ -17,7 +17,7 @@ export default function History() {
 
     useShareAppMessage(() => {
       return {
-        title: '我的胜道赛道成绩', // 分享标题
+        title: '我的426赛道成绩', // 分享标题
         path: '/pages/history/index', // 分享路径，通常为当前页面路径
       };
     });

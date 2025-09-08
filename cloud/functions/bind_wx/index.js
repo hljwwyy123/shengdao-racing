@@ -16,8 +16,11 @@ const db = tcbapp.database()
 exports.main = async (event, context) => {
     const userInfo = {...event.userInfo};
     delete event.userInfo;
+    console.log(userInfo)
     const wxContext = cloud.getWXContext()
     const payload = {...event, ...userInfo, unionId: wxContext.UNIONID, bindTime: moment(new Date().getTime()).format("YYYY-MM-DD HH:mm:ss")};
+    console.log(payload)
+    debugger
     await db.collection('openid_union_timer').add(payload)
     return payload
 };
