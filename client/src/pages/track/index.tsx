@@ -15,7 +15,7 @@ export default function TrackIntro() {
 
   useShareAppMessage(() => {
     return {
-      title: '胜道赛道简介', // 分享标题
+      title: '426赛道简介', // 分享标题
       path: '/pages/track/index', // 分享路径，通常为当前页面路径
     };
   });

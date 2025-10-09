@@ -37,9 +37,10 @@ async function combineData(postData) {
             "lap_create_time": el.lap_create_time,
             "single_score": el.single_score,
             "timer_num": el.car_name,
+            "match_seq": el.match_seq
         }
         if (bindRecord.data && bindRecord.data.length) {
-            const {avatar, nickName, openId, carName, displacement, group, unionId } = bindRecord.data[0]
+            const {avatar, nickName, openId, carName, vehicleType, displacement, group, unionId } = bindRecord.data[0]
             const record = {
                 ...originData,
                 "avatar": avatar,
@@ -48,7 +49,8 @@ async function combineData(postData) {
                 "unionId": unionId,
                 "group": group,
                 "carName": carName,
-                "displacement": displacement
+                "displacement": displacement,
+                "vehicleType": vehicleType
             }
             payloadList.push(record)
         } else {

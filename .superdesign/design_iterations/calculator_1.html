@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberCalc 9000</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="cybercalc_theme.css">
+  <style>
+    .display {
+      font-family: 'Segment7', monospace;
+      letter-spacing: -2px;
+      text-shadow: 0 0 8px oklch(0.95 0.15 80 / 0.4);
+    }
+  </style>
+</head>
+<body class="bg-[var(--background)] min-h-screen flex items-center justify-center p-4">
+  <div class="bg-[var(--muted)] rounded-2xl p-6 shadow-2xl border-2 border-[var(--border)] w-full max-w-xs">
+    
+    <!-- Display -->
+    <div class="bg-[var(--input)] rounded-lg p-4 mb-4 display text-3xl text-[var(--accent)] text-right font-bold">
+      8888.88
+    </div>
+
+    <!-- Button Grid -->
+    <div class="grid grid-cols-4 gap-2">
+      <!-- Memory Buttons -->
+      <button class="col-span-2 bg-[var(--secondary)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        MC
+      </button>
+      <button class="bg-[var(--secondary)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        MR
+      </button>
+      <button class="bg-[var(--secondary)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        M+
+      </button>
+
+      <!-- Operators -->
+      <button class="bg-[var(--primary)] text-[var(--primary-foreground)] p-2 rounded-lg hover:bg-[var(--accent)]">
+        ÷
+      </button>
+      <button class="bg-[var(--primary)] text-[var(--primary-foreground)] p-2 rounded-lg hover:bg-[var(--accent)]">
+        ×
+      </button>
+      <button class="bg-[var(--primary)] text-[var(--primary-foreground)] p-2 rounded-lg hover:bg-[var(--accent)]">
+        −
+      </button>
+      <button class="bg-[var(--primary)] text-[var(--primary-foreground)] p-2 rounded-lg hover:bg-[var(--accent)]">
+        +
+      </button>
+
+      <!-- Numbers -->
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)] col-span-2">
+        0
+      </button>
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        .
+      </button>
+      <button class="bg-[var(--destructive)] text-white p-2 rounded-lg hover:bg-[var(--accent)]">
+        =
+      </button>
+
+      <!-- Number Row 1-3 -->
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        1
+      </button>
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        2
+      </button>
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        3
+      </button>
+
+      <!-- Number Row 4-6 -->
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        4
+      </button>
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        5
+      </button>
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        6
+      </button>
+
+      <!-- Number Row 7-9 -->
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        7
+      </button>
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        8
+      </button>
+      <button class="bg-[var(--input)] text-[var(--foreground)] p-2 rounded-lg hover:bg-[var(--primary)]">
+        9
+      </button>
+    </div>
+  </div>
+</body>
+</html>

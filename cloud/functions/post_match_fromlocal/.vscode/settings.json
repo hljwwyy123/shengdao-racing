@@ -1,0 +1,16 @@
+{
+    "files.autoSave": "afterDelay",
+    "workbench.startupEditor": "readme",
+    "explorer.compactFolders": false,
+    "editor.formatOnSave": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/*.crswap": true,
+        ".tcb_tmp": true
+    }
+}

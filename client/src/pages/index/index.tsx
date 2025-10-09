@@ -46,7 +46,7 @@ export default function Index() {
 
   useShareAppMessage(() => {
     return {
-      title: '胜道巅峰榜', // 分享标题
+      title: '426巅峰榜', // 分享标题
       path: '/pages/index/index', // 分享路径，通常为当前页面路径
     };
   });
