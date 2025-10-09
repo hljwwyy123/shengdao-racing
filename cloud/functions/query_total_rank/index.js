@@ -17,12 +17,24 @@ const db = tcbapp.database({ throwOnNotFound: false })
 const _ = db.command;
 
 exports.main = async (event, context) => {
-    const { vehicleType } = event;
+    const { vehicleType = 'motorcycle'} = event
     console.log({vehicleType})
+       // 兼容 motorcycle 和 Moto 两种值（它们实际上代表同一种车型）
+    const getCompatibleVehicleTypes = (type) => {
+      // motorcycle 和 Moto 都代表摩托车，需要兼容查询
+      if (type === 'motorcycle' || type === 'Moto') {
+        return ['motorcycle', 'Moto'];
+      }
+      // 其他类型（如 Car）直接返回
+      return [type];
+    };
+
+    const compatibleTypes = getCompatibleVehicleTypes(vehicleType);
+
     let matchCondition = {
       openId: _.exists(true),
       single_score: _.gt(70000),
-      vehicleType: _.eq(vehicleType)
+      vehicleType: _.in(compatibleTypes)
     };
    
     
@@ -34,7 +46,7 @@ exports.main = async (event, context) => {
         _id: '$openId', 
         min_single_score: {"$min": "$single_score"}
       })
-      .limit(500)
+      .limit(2000)
       .end();
     // 查询对应的记录
     const data = await Promise.all(result.data.map(async item => {
@@ -42,7 +54,7 @@ exports.main = async (event, context) => {
         .where({
           openId: db.command.eq(item._id), // 使用当前 _id 即 openId 进行查询
           single_score: db.command.eq(item.min_single_score), // 最小 single_score 对应的记录
-          vehicleType: _.eq(vehicleType)
+          vehicleType: _.in(compatibleTypes)
         })
         .limit(1) // 只查询一条记录
         .get();
