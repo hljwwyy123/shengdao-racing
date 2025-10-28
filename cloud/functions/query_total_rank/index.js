@@ -25,6 +25,9 @@ exports.main = async (event, context) => {
       if (type === 'motorcycle' || type === 'Moto') {
         return ['motorcycle', 'Moto'];
       }
+      if (type === 'car' || type === 'Car') {
+        return ['car', 'Car'];
+      }
       // 其他类型（如 Car）直接返回
       return [type];
     };

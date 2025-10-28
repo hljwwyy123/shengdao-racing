@@ -13,8 +13,8 @@
           "name": "比赛列表",
           "pathName": "pages/match/index",
           "query": "",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         },
         {
           "name": "云函数测试",
